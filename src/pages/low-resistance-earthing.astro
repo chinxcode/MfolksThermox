@@ -1,0 +1,101 @@
+---
+import MainLayout from "@layouts/MainLayout.astro";
+import LandingPageTemplate from "@components/landing/LandingPageTemplate.astro";
+import { SITE } from "@data/constants";
+
+const pageTitle = "Low Resistance Earthing Solutions | Sub-1Ω Grounding Systems | MFOLKS Geotrix";
+const metaDescription = "Achieve sub-1 ohm earth resistance with proven grounding solutions. Expert soil analysis, chemical earthing, and grid design for industrial applications.";
+---
+
+<MainLayout
+  title={pageTitle}
+  customDescription={metaDescription}
+  structuredData={{
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: "Low Resistance Earthing Solutions",
+    description: metaDescription,
+    provider: {
+      "@type": "Organization",
+      name: "MFOLKS Geotrix Private Limited"
+    }
+  }}
+>
+  <LandingPageTemplate
+    hero={{
+      badge: "Problem-Solution",
+      title: "Low Resistance Earthing Solutions",
+      subtitle: "Struggling with high soil resistivity? Our engineered grounding systems achieve sub-1 ohm resistance even in challenging soil conditions."
+    }}
+    benefits={[
+      {
+        icon: "zap",
+        title: "Guaranteed Resistance",
+        description: "Achieve target earth resistance values with performance warranty. Sub-1Ω in most soil conditions."
+      },
+      {
+        icon: "tool",
+        title: "Soil Resistivity Analysis",
+        description: "Professional Wenner 4-point testing and soil analysis. Data-driven design approach."
+      },
+      {
+        icon: "layers",
+        title: "Chemical Earthing Systems",
+        description: "Maintenance-free chemical electrodes with conducting compound for difficult soil."
+      },
+      {
+        icon: "grid",
+        title: "Earth Grid Optimization",
+        description: "Mesh grids, radial configurations, and hybrid systems designed per IEEE 80."
+      },
+      {
+        icon: "shield",
+        title: "High Fault Current Handling",
+        description: "Safely dissipate fault currents up to 40kA. Critical for substations and industrial plants."
+      },
+      {
+        icon: "clock",
+        title: "Long-Term Stability",
+        description: "Stable resistance values over decades. Annual testing and validation included."
+      }
+    ]}
+    technicalSpecs={{
+      title: "Solution Approach",
+      specs: [
+        { label: "Soil Testing", value: "Wenner 4-Point Method" },
+        { label: "Design Standard", value: "IEEE 80, IS 3043" },
+        { label: "Electrode Types", value: "Chemical, Copper Bonded, Pipes" },
+        { label: "Backfill Materials", value: "Bentonite, BFC, Coke Breeze" },
+        { label: "Target Resistance", value: "<1Ω (customizable)" },
+        { label: "Fault Current Rating", value: "Up to 40kA" },
+        { label: "Grid Configurations", value: "Mesh, Radial, Hybrid" },
+        { label: "Validation", value: "Fall of Potential Testing" }
+      ]
+    }}
+    applications={[
+      "33kV/11kV Substations",
+      "Industrial HT Installations",
+      "Data Centers & Server Rooms",
+      "Telecom & Communication Sites",
+      "Hospital Critical Power Systems",
+      "Manufacturing Plants",
+      "High-Rise Buildings",
+      "Oil & Gas Facilities"
+    ]}
+    compliance={{
+      title: "Engineering Standards",
+      standards: [
+        "IEEE 80 (Substation Grounding)",
+        "IS 3043 (Code of Practice)",
+        "IEC 62305 (Protection Against Lightning)",
+        "IS 61936 (Power Installations)"
+      ]
+    }}
+    cta={{
+      title: "Solve Your Earthing Resistance Challenge",
+      description: "Schedule a site visit with our grounding engineers. We'll test your soil, design the optimal system, and guarantee the results.",
+      buttonText: "Book Site Survey",
+      buttonUrl: "/contact-us"
+    }}
+  />
+</MainLayout>

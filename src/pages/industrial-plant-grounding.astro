@@ -1,0 +1,102 @@
+---
+import MainLayout from "@layouts/MainLayout.astro";
+import LandingPageTemplate from "@components/landing/LandingPageTemplate.astro";
+import { SITE } from "@data/constants";
+
+const pageTitle = "Industrial Plant Grounding Solutions | Factory Earthing Systems | MFOLKS Geotrix";
+const metaDescription = "Complete grounding solutions for industrial manufacturing plants. IEEE 80 compliant earthing systems for HT/LT installations, equipment safety, and personnel protection.";
+---
+
+<MainLayout
+  title={pageTitle}
+  customDescription={metaDescription}
+  structuredData={{
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: "Industrial Plant Grounding",
+    description: metaDescription,
+    provider: {
+      "@type": "Organization",
+      name: "MFOLKS Geotrix Private Limited"
+    }
+  }}
+>
+  <LandingPageTemplate
+    hero={{
+      badge: "Industry Solution",
+      title: "Industrial Plant Grounding Systems",
+      subtitle: "Engineered grounding solutions for manufacturing facilities. Protect personnel, equipment, and ensure electrical safety compliance with comprehensive earthing systems."
+    }}
+    benefits={[
+      {
+        icon: "shield",
+        title: "Personnel Safety",
+        description: "Limit touch and step potentials per IEEE 80. Protect workers from electric shock during fault conditions."
+      },
+      {
+        icon: "zap",
+        title: "Equipment Protection",
+        description: "Proper grounding for motors, transformers, switchgear, and process equipment. Prevent damage from fault currents."
+      },
+      {
+        icon: "tool",
+        title: "Soil Resistivity Testing",
+        description: "Comprehensive Wenner 4-point testing and analysis. Data-driven design optimized for your site conditions."
+      },
+      {
+        icon: "checkCircle",
+        title: "CEA & CEIG Compliance",
+        description: "Meet all statutory requirements for factory electrical safety. Inspection-ready installations."
+      },
+      {
+        icon: "grid",
+        title: "Earth Grid Design",
+        description: "Mesh grids for substations, individual rods for equipment, and lightning protection integration."
+      },
+      {
+        icon: "award",
+        title: "Turnkey Execution",
+        description: "Design, supply, installation, testing, and commissioning. Guaranteed resistance values with warranty."
+      }
+    ]}
+    technicalSpecs={{
+      title: "System Design Approach",
+      specs: [
+        { label: "Design Standard", value: "IEEE 80, IS 3043" },
+        { label: "Soil Analysis", value: "Wenner 4-Point Method" },
+        { label: "Grid Types", value: "Mesh, Radial, Ring" },
+        { label: "Electrode Materials", value: "Copper Bonded, Chemical, Pipes" },
+        { label: "Conductors", value: "GI/Copper Strip (50-100mm²)" },
+        { label: "Target Resistance", value: "<1Ω (customizable)" },
+        { label: "Fault Current", value: "Up to 40kA" },
+        { label: "Testing Method", value: "Fall of Potential, 3-Point" }
+      ]
+    }}
+    applications={[
+      "Automobile Manufacturing",
+      "Steel & Metal Processing",
+      "Chemical & Pharmaceutical",
+      "Food & Beverage Plants",
+      "Textile Manufacturing",
+      "Electronics Assembly",
+      "Heavy Machinery Plants",
+      "Process Industries"
+    ]}
+    compliance={{
+      title: "Regulatory Compliance",
+      standards: [
+        "IEEE 80 (Grounding)",
+        "IS 3043 (Earthing Practice)",
+        "CEA (Safety Requirements)",
+        "IS 61936 (Power Installations)",
+        "Factory Act 1948"
+      ]
+    }}
+    cta={{
+      title: "Design Your Industrial Grounding System",
+      description: "Our electrical safety engineers will conduct site surveys, soil testing, and provide a compliant grounding design for your manufacturing facility.",
+      buttonText: "Schedule Site Visit",
+      buttonUrl: "/contact-us"
+    }}
+  />
+</MainLayout>

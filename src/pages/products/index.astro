@@ -1,0 +1,46 @@
+---
+// Importing necessary components
+import MainLayout from "@layouts/MainLayout.astro";
+import ProductList from "@components/products/ProductList";
+import { wpFetch, ALL_PRODUCTS_QUERY, ALL_CATEGORIES_QUERY } from "@lib/wp";
+import { SITE } from "@data/constants";
+
+// Fetch products and categories from WordPress
+const data = await wpFetch(ALL_PRODUCTS_QUERY);
+const categoriesData = await wpFetch(ALL_CATEGORIES_QUERY);
+
+let products = data?.products?.nodes || [];
+let categories = categoriesData?.productCategories?.nodes || [];
+
+// Fallback if categories are not fetched separately, try to extract from products
+if (categories.length === 0 && products.length > 0) {
+  const catMap = new Map();
+  products.forEach((p: any) => {
+    p.productCategories?.nodes?.forEach((c: any) => {
+      catMap.set(c.slug, c);
+    });
+  });
+  categories = Array.from(catMap.values());
+}
+
+const pageTitle = `Products | ${SITE.title}`;
+const metaDescription = "Explore our comprehensive range of earthing and lightning protection solutions. Each product is designed for reliability, safety, and superior performance.";
+const ogTitle = "Earthing & Lightning Protection Products | MFOLKS Geotrix";
+---
+
+<MainLayout
+  title={pageTitle}
+  customDescription={metaDescription}
+  customOgTitle={ogTitle}
+>
+  <div class="relative transition-colors duration-300">
+      {/* Hero Section */}
+
+      <div class="section-padding pb-24 pt-8">
+         <ProductList client:load initialProducts={products} categories={categories} />
+      </div>
+
+      {/* Quote Section Hook (Optional ID target) */}
+      <div id="quote-form"></div>
+  </div>
+</MainLayout>

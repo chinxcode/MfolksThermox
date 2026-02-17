@@ -1,0 +1,207 @@
+---
+import Icon from "@components/ui/icons/Icon.astro";
+
+interface Props {
+  hero: {
+    badge?: string;
+    title: string;
+    subtitle: string;
+  };
+  benefits: {
+    icon: string;
+    title: string;
+    description: string;
+  }[];
+  technicalSpecs?: {
+    title: string;
+    specs: { label: string; value: string }[];
+  };
+  applications?: string[];
+  compliance?: {
+    title: string;
+    standards: string[];
+  };
+  cta: {
+    title: string;
+    description: string;
+    buttonText: string;
+    buttonUrl: string;
+  };
+}
+
+const { hero, benefits, technicalSpecs, applications, compliance, cta } = Astro.props;
+---
+
+<!-- Hero Section -->
+<section class="relative bg-gradient-to-br from-orange-600 via-orange-500 to-yellow-500 dark:from-neutral-900 dark:via-neutral-800 dark:to-neutral-900 py-20 lg:py-28">
+  <div class="absolute inset-0 bg-[linear-gradient(to_right,#ffffff15_1px,transparent_1px),linear-gradient(to_bottom,#ffffff15_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+  
+  <div class="relative mx-auto max-w-[85rem] px-4 sm:px-6 lg:px-8">
+    <div class="max-w-3xl">
+      {hero.badge && (
+        <span class="inline-block mb-6 px-4 py-2 bg-white/20 dark:bg-orange-500/10 border border-white/30 dark:border-orange-500/20 backdrop-blur-sm rounded-full text-white dark:text-orange-400 text-sm font-bold uppercase tracking-wider shadow-lg">
+          {hero.badge}
+        </span>
+      )}
+      
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 drop-shadow-lg">
+        {hero.title}
+      </h1>
+      
+      <p class="text-xl text-white/95 dark:text-neutral-300 mb-10 leading-relaxed drop-shadow">
+        {hero.subtitle}
+      </p>
+      
+      <div class="flex flex-wrap gap-4">
+        <a 
+          href="/contact-us" 
+          class="inline-flex items-center justify-center px-8 py-4 bg-white text-orange-600 hover:bg-neutral-50 dark:bg-orange-500 dark:hover:bg-orange-600 dark:text-white font-bold rounded-xl transition-all shadow-xl hover:shadow-2xl hover:scale-105"
+        >
+          Get Technical Quote
+        </a>
+        <a 
+          href="/products" 
+          class="inline-flex items-center justify-center px-8 py-4 border-2 border-white/40 backdrop-blur-sm text-white hover:bg-white/10 dark:border-white/20 font-bold rounded-xl transition-colors shadow-lg"
+        >
+          View Products
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Benefits Section -->
+<section class="py-20 lg:py-28 bg-neutral-50 dark:bg-neutral-900">
+  <div class="mx-auto max-w-[85rem] px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-neutral-100 mb-4">
+        Key Benefits & Features
+      </h2>
+      <p class="text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
+        Engineered for performance, compliance, and reliability
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {benefits.map((benefit) => (
+        <div class="group p-8 rounded-2xl border-2 border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 hover:border-orange-500 dark:hover:border-orange-500/50 hover:shadow-2xl transition-all duration-300">
+          <div class="mb-6 w-14 h-14 flex items-center justify-center rounded-xl bg-orange-100 dark:bg-orange-500/10 text-orange-600 dark:text-orange-500 group-hover:bg-orange-500 group-hover:text-white transition-colors">
+            <Icon name={benefit.icon} />
+          </div>
+          <h3 class="text-xl font-bold text-neutral-900 dark:text-neutral-100 mb-3">
+            {benefit.title}
+          </h3>
+          <p class="text-neutral-700 dark:text-neutral-400 leading-relaxed">
+            {benefit.description}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- Technical Specifications -->
+{technicalSpecs && (
+  <section class="py-20 lg:py-28 bg-white dark:bg-neutral-950">
+    <div class="mx-auto max-w-[85rem] px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-neutral-100">
+          {technicalSpecs.title}
+        </h2>
+      </div>
+
+      <div class="max-w-4xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-4">
+          {technicalSpecs.specs.map((spec) => (
+            <div class="flex items-center justify-between p-6 bg-neutral-50 dark:bg-neutral-900 rounded-xl border-2 border-neutral-200 dark:border-neutral-800 hover:border-orange-500 dark:hover:border-orange-500/50 transition-colors">
+              <span class="font-bold text-neutral-700 dark:text-neutral-300 text-sm uppercase tracking-wide">
+                {spec.label}
+              </span>
+              <span class="text-neutral-900 dark:text-neutral-100 font-semibold text-right ml-4">
+                {spec.value}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+)}
+
+<!-- Applications -->
+{applications && applications.length > 0 && (
+  <section class="py-20 lg:py-28 bg-neutral-50 dark:bg-neutral-900">
+    <div class="mx-auto max-w-[85rem] px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-neutral-100 mb-4">
+          Ideal Applications
+        </h2>
+        <p class="text-lg text-neutral-600 dark:text-neutral-400">
+          Trusted across industries for critical infrastructure
+        </p>
+      </div>
+
+      <div class="max-w-5xl mx-auto grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {applications.map((app) => (
+          <div class="flex items-start gap-3 p-5 rounded-xl bg-blue-50 dark:bg-blue-900/20 border-2 border-blue-200 dark:border-blue-900/50 hover:border-blue-400 dark:hover:border-blue-700 hover:shadow-lg transition-all">
+            <svg class="w-6 h-6 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+            </svg>
+            <span class="text-sm font-semibold text-blue-900 dark:text-blue-100 leading-snug">
+              {app}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+)}
+
+<!-- Compliance -->
+{compliance && (
+  <section class="py-20 lg:py-28 bg-green-50 dark:bg-green-900/10">
+    <div class="mx-auto max-w-[85rem] px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-green-900 dark:text-green-100 mb-4">
+          {compliance.title}
+        </h2>
+        <p class="text-lg text-green-800 dark:text-green-300">
+          Fully compliant with international and Indian standards
+        </p>
+      </div>
+
+      <div class="flex flex-wrap justify-center gap-4 max-w-4xl mx-auto">
+        {compliance.standards.map((standard) => (
+          <span class="inline-flex items-center px-6 py-3 bg-white dark:bg-green-900/30 border-2 border-green-300 dark:border-green-800 rounded-xl text-base font-bold text-green-900 dark:text-green-100 hover:border-green-500 dark:hover:border-green-700 hover:shadow-lg transition-all">
+            {standard}
+          </span>
+        ))}
+      </div>
+    </div>
+  </section>
+)}
+
+<!-- CTA Section -->
+<section class="relative py-20 lg:py-28 bg-gradient-to-r from-orange-500 to-orange-600 overflow-hidden">
+  <div class="absolute inset-0 bg-[linear-gradient(to_right,#ffffff15_1px,transparent_1px),linear-gradient(to_bottom,#ffffff15_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+  
+  <div class="relative mx-auto max-w-[85rem] px-4 sm:px-6 lg:px-8 text-center">
+    <h2 class="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight drop-shadow-lg">
+      {cta.title}
+    </h2>
+    
+    <p class="text-xl text-white/95 mb-10 max-w-3xl mx-auto leading-relaxed drop-shadow">
+      {cta.description}
+    </p>
+    
+    <a 
+      href={cta.buttonUrl} 
+      class="inline-flex items-center justify-center px-10 py-5 bg-white text-orange-600 font-bold text-lg rounded-xl hover:bg-neutral-50 transition-all shadow-2xl hover:shadow-white/25 hover:scale-105"
+    >
+      {cta.buttonText}
+      <svg class="ml-2 w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+      </svg>
+    </a>
+  </div>
+</section>

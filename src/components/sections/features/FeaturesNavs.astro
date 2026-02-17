@@ -1,0 +1,309 @@
+---
+// Import the necessary dependencies
+import { Image } from "astro:assets";
+import Icon from "@components/ui/icons/Icon.astro";
+import TabNav from "@components/ui/blocks/TabNav.astro";
+import TabContent from "@components/ui/blocks/TabContent.astro";
+
+// Define props from Astro
+const { title, tabs } = Astro.props;
+
+interface Tab {
+  heading: string;
+  content: string;
+  svg: string;
+  src: any;
+  alt: string;
+  first?: boolean;
+}
+
+interface Props {
+  title?: string;
+  tabs: Tab[];
+}
+---
+
+<section 
+  class="product-reel-root relative w-full bg-neutral-50 dark:bg-neutral-950 transition-colors duration-500" 
+  style={`height: ${(tabs.length + 2) * 100}vh;`}
+>
+  <!-- Sticky Viewport -->
+  <div class="sticky top-0 h-screen w-full overflow-hidden flex items-center">
+    
+    <!-- Background Image Layer -->
+    <div class="absolute inset-0 z-0">
+      {tabs.map((tab, index) => (
+        <div 
+          class="reel-bg-img absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0"
+          data-index={index}
+        >
+          <Image 
+            src={tab.src} 
+            alt={tab.alt} 
+            class="h-full w-full object-cover brightness-[0.9] dark:brightness-[0.2] transition-all duration-700"
+          />
+          <!-- Adaptive Gradient Overlay -->
+          <div class="absolute inset-0 bg-gradient-to-r from-neutral-50 via-neutral-50/40 to-transparent dark:from-neutral-950 dark:via-neutral-950/40"></div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Main Content Container -->
+    <div class="relative z-10 mx-auto max-w-[85rem] px-4 sm:px-6 lg:px-8 w-full grid lg:grid-cols-2 gap-12 items-center h-full pt-20">
+      
+      <!-- Left side: Detailed Info (Active Only) -->
+      <div class="hidden lg:block">
+        <div class="mb-4">
+            <span class="inline-block px-4 py-1.5 rounded-full bg-orange-500/10 text-orange-500 text-xs font-black uppercase tracking-[0.2em] border border-orange-500/20">
+                Premium Solutions
+            </span>
+        </div>
+        <h2 class="text-4xl md:text-6xl font-black text-neutral-800 dark:text-white mb-8 border-l-8 border-orange-500 pl-8 leading-tight">
+          <Fragment set:html={title} />
+        </h2>
+        
+        <div class="relative h-64">
+           {tabs.map((tab, index) => (
+             <div class="reel-info absolute inset-0 opacity-0 translate-x-[-20px] transition-all duration-700 pointer-events-none" data-index={index}>
+                <h3 class="text-3xl font-bold text-orange-500 dark:text-orange-400 mb-4">{tab.heading}</h3>
+                <p class="text-xl text-neutral-600 dark:text-neutral-300 leading-relaxed max-w-lg">
+                  {tab.content}
+                </p>
+                <div class="mt-8">
+                    <a href="/products" class="inline-flex items-center gap-2 text-neutral-800 dark:text-white font-bold group">
+                        View Technical Specs
+                        <svg class="w-5 h-5 transition-transform group-hover:translate-x-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                    </a>
+                </div>
+             </div>
+           ))}
+        </div>
+      </div>
+
+      <!-- Right side: The Dynamic Reel -->
+      <div class="relative flex flex-col items-center lg:items-end justify-center h-full overflow-hidden py-32">
+         <div class="product-reel-track relative w-full max-w-md flex flex-col gap-12 transition-transform duration-500 ease-out">
+            {tabs.map((tab, index) => (
+              <div 
+                class="reel-card relative group cursor-pointer transition-all duration-500 ease-out origin-center lg:origin-right"
+                data-index={index}
+              >
+                <!-- Card Inner -->
+                <div class="relative bg-white/20 backdrop-blur-xl border border-neutral-200/50 dark:border-white/10 p-6 rounded-[2rem] overflow-hidden shadow-xl transition-all duration-500 group-hover:bg-white/30 dark:group-hover:bg-white/10 active:scale-95">
+                  <div class="flex items-center gap-6">
+                    <div class="flex-shrink-0 w-20 h-20 rounded-2xl overflow-hidden shadow-lg border-2 border-orange-500/30">
+                        <Image src={tab.src} alt={tab.alt} class="w-full h-full object-cover" />
+                    </div>
+                    <div class="flex-grow">
+                        <div class="text-orange-600 dark:text-orange-500 text-xs font-black mb-1 uppercase tracking-widest">Category 0{index + 1}</div>
+                        <h4 class="text-xl font-black text-neutral-800 dark:text-white">{tab.heading}</h4>
+                    </div>
+                    <div class="flex-shrink-0 opacity-40 group-hover:opacity-100 transition-opacity">
+                        <div class="p-3 rounded-full bg-neutral-200/50 dark:bg-white/10">
+                            <Icon name={tab.svg} class="w-6 h-6 text-neutral-800 dark:text-white" />
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Selection Glow -->
+                <div class="reel-glow absolute -inset-1 bg-gradient-to-r from-orange-500 to-yellow-500 rounded-[2rem] opacity-0 blur-xl transition-opacity duration-500 -z-10"></div>
+              </div>
+            ))}
+         </div>
+      </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2">
+        <span class="text-xs font-black text-white/40 uppercase tracking-[0.3em]">Scroll to Explore</span>
+        <div class="w-px h-12 bg-gradient-to-b from-orange-500 to-transparent"></div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function initProductReel() {
+    const root = document.querySelector('.product-reel-root') as HTMLElement;
+    if (!root) return;
+
+    const track = root.querySelector('.product-reel-track') as HTMLElement;
+    const cards = root.querySelectorAll('.reel-card');
+    const bgImgs = root.querySelectorAll('.reel-bg-img');
+    const infos = root.querySelectorAll('.reel-info');
+    const total = cards.length;
+
+    function updateReel() {
+      const rect = root.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+      const scrolled = -rect.top;
+      const totalScrollable = rect.height - viewportHeight;
+      
+      // Normalized progress (0 to 1)
+      let progress = scrolled / totalScrollable;
+      progress = Math.max(0, Math.min(1, progress));
+
+      // Active index based on scroll - use a more centered detection
+      const activeIndex = Math.min(Math.floor(progress * total), total - 1);
+
+      // PERFECT CENTERING LOGIC:
+      // We calculate the offset needed to move the active card to the center of the track container
+      const trackHeight = track.offsetHeight;
+      const cardHeight = (cards[0] as HTMLElement).offsetHeight;
+      const gap = 48; // Matches gap-12 (3rem = 48px)
+      
+      // Target position: (viewportMiddle - cardMiddle)
+      // Since tracks is inside a centered container, we offset based on item index
+      const itemOffset = activeIndex * (cardHeight + gap);
+      const centerOffset = -itemOffset + (trackHeight / 2) - (cardHeight / 2);
+      
+      track.style.transform = `translateY(${centerOffset}px)`;
+
+      cards.forEach((card, i) => {
+        const el = card as HTMLElement;
+        const glow = el.querySelector('.reel-glow') as HTMLElement;
+        const inner = el.firstElementChild as HTMLElement;
+        
+        // Calculate relative distance from focus
+        const itemPoint = i / (total - 1);
+        let distance = Math.abs(progress - itemPoint) * total;
+        
+        // MAGNETIC "DWELL" ZONE:
+        // If distance is small, we force it to 0 so it stays scale and opaque
+        if (distance < 0.25) {
+          distance = 0;
+        } else {
+          // Adjust the transition ramp outside the dwell zone
+          distance = (distance - 0.25) * 1.33;
+        }
+        
+        // Scale logic: biggest at focal point
+        let scale = 1.25 - (distance * 0.25);
+        scale = Math.max(0.7, scale);
+
+        // Opacity logic
+        let opacity = 1 - (distance * 0.6);
+        opacity = Math.max(0.15, opacity);
+
+        // Applying transforms
+        el.style.transform = `scale(${scale})`;
+        el.style.opacity = opacity.toString();
+        
+        if (i === activeIndex) {
+            glow.style.opacity = '0.4';
+            inner.style.borderColor = 'rgba(249, 115, 22, 0.6)';
+            inner.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
+            inner.style.boxShadow = '0 20px 40px -10px rgba(0,0,0,0.3)';
+        } else {
+            glow.style.opacity = '0';
+            inner.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+            inner.style.backgroundColor = 'rgba(255, 255, 255, 0.05)';
+            inner.style.boxShadow = 'none';
+        }
+      });
+
+      // Update Backgrounds and Info Panels
+      bgImgs.forEach((img, i) => {
+        const el = img as HTMLElement;
+        el.style.opacity = i === activeIndex ? '1' : '0';
+      });
+
+      infos.forEach((info, i) => {
+        const el = info as HTMLElement;
+        if (i === activeIndex) {
+            el.style.opacity = '1';
+            el.style.transform = 'translateX(0)';
+            el.style.pointerEvents = 'auto';
+        } else {
+            el.style.opacity = '0';
+            el.style.transform = 'translateX(-20px)';
+            el.style.pointerEvents = 'none';
+        }
+      });
+    }
+
+    let ticking = false;
+    let scrollTimeout: any = null;
+    let isAutoScrolling = false;
+
+    // Magnetic Snapping Logic
+    function handleSnap() {
+      if (isAutoScrolling) return;
+
+      const rect = root.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+      const scrolled = -rect.top;
+      const totalScrollable = rect.height - viewportHeight;
+
+      // Only snap if we are within the reel's scroll boundaries
+      // (with a small buffer to allow entering/exiting)
+      if (scrolled < 50 || scrolled > totalScrollable - 50) return;
+
+      const progress = Math.max(0, Math.min(1, scrolled / totalScrollable));
+      const targetIndex = Math.round(progress * (total - 1));
+      const targetScroll = root.offsetTop + (targetIndex / (total - 1)) * totalScrollable;
+
+      // Only snap if we aren't already very close to the target
+      if (Math.abs(window.scrollY - targetScroll) < 10) return;
+
+      isAutoScrolling = true;
+      window.scrollTo({
+        top: targetScroll,
+        behavior: 'smooth'
+      });
+
+      // Unlock after the smooth scroll is likely finished
+      setTimeout(() => {
+        isAutoScrolling = false;
+      }, 700);
+    }
+
+    window.addEventListener('scroll', () => {
+      // Regular visual updates
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          updateReel();
+          ticking = false;
+        });
+        ticking = true;
+      }
+
+      // Debounced snapping
+      clearTimeout(scrollTimeout);
+      if (!isAutoScrolling) {
+        scrollTimeout = setTimeout(handleSnap, 150); // Small pause before magnetic pull
+      }
+    });
+
+    // Handle clicks on cards to jump to section
+    cards.forEach((card, i) => {
+        card.addEventListener('click', () => {
+            const dest = (i / total) * (root.offsetHeight - window.innerHeight);
+            window.scrollTo({
+                top: root.offsetTop + dest + 10,
+                behavior: 'smooth'
+            });
+        });
+    });
+
+    updateReel();
+  }
+
+  document.addEventListener('astro:page-load', initProductReel);
+  initProductReel();
+</script>
+
+<style>
+  .product-reel-root {
+    contain: paint;
+  }
+  
+  .reel-card {
+    will-change: transform, opacity;
+  }
+
+  .reel-bg-img, .reel-info {
+    will-change: opacity, transform;
+  }
+</style>

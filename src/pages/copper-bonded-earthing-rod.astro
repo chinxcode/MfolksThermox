@@ -1,0 +1,106 @@
+---
+import MainLayout from "@layouts/MainLayout.astro";
+import LandingPageTemplate from "@components/landing/LandingPageTemplate.astro";
+import { SITE } from "@data/constants";
+
+const pageTitle = "Copper Bonded Earthing Rod Manufacturer | IS Standard Grounding Rods | MFOLKS Geotrix";
+const metaDescription = "Premium copper bonded earthing rods for industrial grounding. IS 3043 compliant, low resistance, corrosion resistant. Manufacturer & supplier for EPC projects.";
+---
+
+<MainLayout
+  title={pageTitle}
+  customDescription={metaDescription}
+  structuredData={{
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: "Copper Bonded Earthing Rod",
+    description: metaDescription,
+    brand: {
+      "@type": "Brand",
+      name: "MFOLKS Geotrix"
+    },
+    offers: {
+      "@type": "AggregateOffer",
+      priceCurrency: "INR",
+      availability: "https://schema.org/InStock"
+    }
+  }}
+>
+  <LandingPageTemplate
+    hero={{
+      badge: "Product Solution",
+      title: "Copper Bonded Earthing Rods",
+      subtitle: "IS 3043 compliant copper bonded grounding electrodes designed for industrial and infrastructure projects. Superior conductivity, corrosion resistance, and long-term performance."
+    }}
+    benefits={[
+      {
+        icon: "checkCircle",
+        title: "IS 3043 Compliance",
+        description: "Fully compliant with Indian Standards for copper bonded electrodes. Third-party tested and certified."
+      },
+      {
+        icon: "shield",
+        title: "99.9% Pure Copper",
+        description: "High conductivity copper bonding over mild steel core. Ensures optimal grounding performance."
+      },
+      {
+        icon: "clock",
+        title: "30+ Year Lifespan",
+        description: "Corrosion-resistant design with thick copper bonding. Minimal maintenance required over decades."
+      },
+      {
+        icon: "zap",
+        title: "Low Resistance",
+        description: "Achieve sub-1 ohm earthing with proper installation. Ideal for sensitive equipment protection."
+      },
+      {
+        icon: "tool",
+        title: "Easy Installation",
+        description: "Standardized diameters and lengths. Compatible with all standard driving accessories."
+      },
+      {
+        icon: "award",
+        title: "Manufacturer Direct",
+        description: "Factory prices with technical support. Bulk orders for EPC contractors and projects."
+      }
+    ]}
+    technicalSpecs={{
+      title: "Technical Specifications",
+      specs: [
+        { label: "Core Material", value: "Low Carbon Steel" },
+        { label: "Copper Thickness", value: "250-300 microns" },
+        { label: "Copper Purity", value: "99.9%" },
+        { label: "Standard Lengths", value: "1.5m, 2m, 3m" },
+        { label: "Diameters Available", value: "12.7mm, 14.2mm, 17.2mm" },
+        { label: "Bond Strength", value: ">21 N/mm²" },
+        { label: "Compliance", value: "IS 3043, IEC 62561" },
+        { label: "Electrode Resistance", value: "<0.5 Ω in standard soil" }
+      ]
+    }}
+    applications={[
+      "Industrial Manufacturing Plants",
+      "Solar Power Plants",
+      "Transmission & Distribution",
+      "Data Centers",
+      "Telecom Towers",
+      "Oil & Gas Installations",
+      "Railway Infrastructure",
+      "Commercial Buildings"
+    ]}
+    compliance={{
+      title: "Standards & Certifications",
+      standards: [
+        "IS 3043",
+        "IEC 62561",
+        "IEEE 80",
+        "IS/IEC 62305"
+      ]
+    }}
+    cta={{
+      title: "Get Technical Quotation",
+      description: "Speak with our earthing engineers for project-specific recommendations, bulk pricing, and delivery timelines.",
+      buttonText: "Request Quote Now",
+      buttonUrl: "/contact-us"
+    }}
+  />
+</MainLayout>

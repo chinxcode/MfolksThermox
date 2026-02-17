@@ -1,0 +1,103 @@
+---
+import MainLayout from "@layouts/MainLayout.astro";
+import LandingPageTemplate from "@components/landing/LandingPageTemplate.astro";
+import { SITE } from "@data/constants";
+
+const pageTitle = "Solar Plant Earthing Solutions | PV Grounding Systems | MFOLKS Geotrix";
+const metaDescription = "Complete earthing & lightning protection for solar power plants. Turnkey grounding solutions for solar EPC projects. IS/IEC compliant systems with warranty.";
+---
+
+<MainLayout
+  title={pageTitle}
+  customDescription={metaDescription}
+  structuredData={{
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: "Solar Plant Earthing Solutions",
+    description: metaDescription,
+    provider: {
+      "@type": "Organization",
+      name: "MFOLKS Geotrix Private Limited"
+    },
+    areaServed: "IN"
+  }}
+>
+  <LandingPageTemplate
+    hero={{
+      badge: "Industry Solution",
+      title: "Solar Plant Earthing & Grounding Systems",
+      subtitle: "Comprehensive grounding solutions for solar power plants. Protect your PV investment with reliable, compliant earthing systems designed for solar EPC projects."
+    }}
+    benefits={[
+      {
+        icon: "sun",
+        title: "Solar-Specific Design",
+        description: "Engineered for module frameworks, inverters, transformers, and AC/DC distribution systems."
+      },
+      {
+        icon: "shield",
+        title: "Lightning Protection",
+        description: "Integrated surge protection and lightning arrestors for complete system safety."
+      },
+      {
+        icon: "checkCircle",
+        title: "MNRE & CEIG Compliant",
+        description: "Meets all regulatory requirements for solar plant commissioning and grid connection."
+      },
+      {
+        icon: "clock",
+        title: "Turnkey Execution",
+        description: "Complete design, supply, installation, and commissioning services for EPC contractors."
+      },
+      {
+        icon: "tool",
+        title: "Soil Resistivity Testing",
+        description: "Pre-installation testing and design optimization based on actual site conditions."
+      },
+      {
+        icon: "award",
+        title: "Performance Warranty",
+        description: "Guaranteed earth resistance values with long-term material warranty."
+      }
+    ]}
+    technicalSpecs={{
+      title: "System Components",
+      specs: [
+        { label: "Main Earthing Electrodes", value: "Copper Bonded Rods / Pipes" },
+        { label: "Ground Grid", value: "GI Strip / Copper Conductor" },
+        { label: "Backfill Compound", value: "Low Resistance BFC" },
+        { label: "Test Points", value: "Accessible Inspection Pits" },
+        { label: "Lightning Arrestors", value: "ESE / Conventional Systems" },
+        { label: "Surge Protection", value: "SPDs for Inverters & SCADA" },
+        { label: "Target Resistance", value: "<1 Ω (adjustable per site)" },
+        { label: "Standards Compliance", value: "IS/IEC 62305, IEEE 80, CEA" }
+      ]
+    }}
+    applications={[
+      "Utility-Scale Solar Plants (MW range)",
+      "Rooftop Solar Installations",
+      "Floating Solar Projects",
+      "Hybrid Wind-Solar Parks",
+      "C&I Solar Captive Plants",
+      "Solar + Storage Projects",
+      "Off-Grid Solar Systems",
+      "Solar Farms & Agrivoltaics"
+    ]}
+    compliance={{
+      title: "Regulatory Compliance",
+      standards: [
+        "IS/IEC 62305 (Lightning Protection)",
+        "IEEE 80 (Grounding Substations)",
+        "CEA (Central Electricity Authority)",
+        "MNRE Guidelines",
+        "IS 3043 (Earthing Electrodes)"
+      ]
+    }}
+    cta={{
+      title: "Get Solar Earthing Design & Quote",
+      description: "Our solar earthing specialists will review your project drawings and provide optimized grounding design with competitive pricing.",
+      buttonText: "Request Engineering Proposal",
+      buttonUrl: "/contact-us"
+    }}
+  />
+</MainLayout>

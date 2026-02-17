@@ -1,0 +1,180 @@
+---
+// Import necessary components
+import MainLayout from "@layouts/MainLayout.astro";
+import MainSection from "@components/ui/blocks/MainSection.astro";
+import LeftSection from "@components/ui/blocks/LeftSection.astro";
+import RightSection from "@components/ui/blocks/RightSection.astro";
+import FeaturesGeneral from "@components/sections/features/FeaturesGeneral.astro";
+import { SITE } from "@data/constants";
+
+// Import images
+import manufacturingImage from "@images/construction-workers.avif";
+import qualityLabImage from "@images/person-working.avif"; 
+import industrialSiteImage from "@images/progress-building.avif";
+import certificationsImage from "@images/blueprints-image.avif";
+import productionImage from "@images/under-construction.avif";
+
+const pageTitle = `About Us | ${SITE.title}`;
+const metaDescription = "MFOLKS Geotrix is a manufacturer of earthing, lightning protection, and electrical grounding components designed for infrastructure and industrial applications.";
+
+interface Article {
+  isRightSection: boolean;
+  title: string;
+  subTitle: string;
+  btnExists?: boolean;
+  btnTitle?: string;
+  btnURL?: string;
+  single?: boolean;
+  img?: any;
+  imgAlt?: string;
+  imgOne?: any;
+  imgOneAlt?: string;
+  imgTwo?: any;
+  imgTwoAlt?: string;
+}
+
+const articles: Article[] = [
+  {
+    isRightSection: true,
+    title: "Manufacturing Experience",
+    subTitle:
+      "Our manufacturing approach is built around structured processes and repeatability. Each stage of production is guided by defined procedures to maintain dimensional consistency, coating integrity, and installation reliability. Experience in supplying infrastructure and industrial projects has shaped how we approach manufacturing: controlled material sourcing, defined production workflows, batch traceability practices, and inspection checkpoints.",
+    single: true,
+    imgOne: manufacturingImage,
+    imgOneAlt: "Manufacturing process experience",
+  },
+  {
+    isRightSection: false,
+    title: "Production Capability",
+    subTitle:
+      "Production capability is not measured only by output volume, but by the ability to maintain uniform quality across batches. Our facility workflow is organized to support repeatable manufacturing for project requirements, scalable production planning, and consistent dimensional checks. This allows us to support infrastructure projects without bypassing quality discipline or process control.",
+    img: productionImage,
+    imgAlt: "Production and facility capability",
+  },
+  {
+    isRightSection: true,
+    title: "Facility & Operational Presence",
+    subTitle:
+      "Manufacturing and inspection activities are coordinated through a structured operational environment designed for industrial component production. Our facility practices emphasize organized material flow, defined production stages, inspection discipline, and traceability awareness. This operational structure supports reliable supply and smoother coordination with installation teams and EPC contractors.",
+    single: true,
+    imgOne: industrialSiteImage,
+    imgOneAlt: "Operational facility",
+  },
+   {
+    isRightSection: false,
+    title: "Compliance & Standards Alignment",
+    subTitle:
+      "Electrical grounding and protection systems demand adherence to recognized practices. Our manufacturing and inspection processes are aligned with relevant industry expectations and project specifications. Compliance support includes reference to applicable guidelines, inspection documentation, and material traceability.",
+    img: certificationsImage,
+    imgAlt: "Compliance documentation",
+  },
+];
+
+const supportFeatures = [
+  {
+    heading: "Industrial Facilities",
+    content: "Dependable components for manufacturing plants and heavy industries.",
+    svg: "building", 
+  },
+  {
+    heading: "Infrastructure Projects",
+    content: "Reliable grounding for public works, transport, and utilities.",
+    svg: "hammer", 
+  },
+  {
+    heading: "Electrical Grounding",
+    content: "Components designed for low-impedance earth termination systems.",
+    svg: "sparks", 
+  },
+  {
+    heading: "Lightning Protection",
+    content: "Installations requiring engineered protection and safety compliance.",
+    svg: "shield", 
+  },
+];
+---
+
+<MainLayout
+  title={pageTitle}
+  customDescription={metaDescription}
+>
+  <!-- Hero Section -->
+  <MainSection
+    title="Manufacturing Grounding & Electrical Protection Solutions"
+    subTitle="MFOLKS Geotrix is a manufacturer of earthing, lightning protection, and electrical grounding components designed for infrastructure and industrial applications. Our focus is on delivering dependable products that meet installation requirements, safety expectations, and long-term field performance. Rather than operating as a trading catalogue, we work as a production-driven organization where engineering discipline, material control, and inspection practices form the foundation of every product we supply."
+  />
+
+  <!-- Detailed Sections -->
+  {
+    articles.map((article) => {
+      return article.isRightSection ? (
+        <RightSection
+          title={article.title}
+          subTitle={article.subTitle}
+          single={article.single}
+          imgOne={article.imgOne}
+          imgOneAlt={article.imgOneAlt || "About section image"}
+          imgTwo={article.imgTwo}
+          imgTwoAlt={article.imgTwoAlt || "About section image"}
+          btnExists={article.btnExists}
+          btnTitle={article.btnTitle}
+          btnURL={article.btnURL}
+        />
+      ) : (
+        <LeftSection
+          title={article.title}
+          subTitle={article.subTitle}
+          img={article.img}
+          imgAlt={article.imgAlt || "About section image"}
+          btnExists={article.btnExists}
+          btnTitle={article.btnTitle}
+          btnURL={article.btnURL}
+        />
+      );
+    })
+  }
+
+  <!-- Engineering & Improvement Text Grid -->
+  <div class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
+      <div class="grid md:grid-cols-2 gap-12">
+        <div>
+            <h3 class="text-2xl font-bold text-neutral-800 dark:text-neutral-200 mb-4">Engineering-Focused Approach</h3>
+            <p class="text-neutral-600 dark:text-neutral-400 mb-6">
+                Grounding and lightning protection components are critical to electrical safety and system reliability. Our focus remains on producing components that integrate properly within engineered installations. We emphasize practical installation compatibility, material integrity, process consistency, and inspection discipline. This approach supports long-term system performance rather than short-term claims.
+            </p>
+        </div>
+        <div>
+            <h3 class="text-2xl font-bold text-neutral-800 dark:text-neutral-200 mb-4">Commitment to Continuous Improvement</h3>
+            <p class="text-neutral-600 dark:text-neutral-400 mb-6">
+                Manufacturing processes evolve with field feedback, inspection findings, and operational review. Continuous refinement helps improve repeatability, reduce variability, and strengthen production discipline. Quality is treated as an ongoing system — not a static promise.
+            </p>
+        </div>
+      </div>
+  </div>
+
+  <!-- Supporting Projects Features -->
+  <FeaturesGeneral
+    title="Supporting Infrastructure & Industrial Projects"
+    subTitle="MFOLKS Geotrix products are intended for demanding applications. Our role is to supply dependable components that support engineered protection systems."
+    features={supportFeatures}
+  />
+
+  <!-- Technical Enquiries CTA -->
+  <div class="bg-neutral-50 dark:bg-neutral-900 border-y border-neutral-200 dark:border-neutral-700">
+      <div class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 text-center">
+          <h2 class="text-3xl font-bold text-neutral-800 dark:text-neutral-200 mb-4">Technical Enquiries & Project Support</h2>
+          <p class="text-neutral-600 dark:text-neutral-400 mb-8 max-w-2xl mx-auto">
+              For project-specific requirements, documentation requests, or technical clarification.
+          </p>
+          <div class="flex flex-wrap justify-center gap-4">
+             <a href="/contact" class="inline-flex justify-center items-center gap-x-3 text-center bg-orange-500 hover:bg-orange-600 border border-transparent text-white text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-white transition py-3 px-4 dark:focus:ring-offset-gray-800">
+                Contact Our Technical Team
+             </a>
+             <a href="/products" class="inline-flex justify-center items-center gap-x-3 text-center bg-white hover:bg-gray-50 border border-gray-200 text-gray-800 text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-white transition py-3 px-4 dark:bg-neutral-800 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-700">
+                Request Product Information
+             </a>
+          </div>
+      </div>
+  </div>
+
+</MainLayout>

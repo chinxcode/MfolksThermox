@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* MFOLKS Geotrix Brand Colors - Industrial Theme */
+@layer base {
+  :root {
+    --color-primary: #f97316; /* orange-500 */
+    --color-primary-hover: #ea580c; /* orange-600 */
+    --color-neutral-dark: #171717; /* neutral-900 */
+    --color-accent: #fbbf24; /* amber-400 */
+  }
+  
+  /* Border color compatibility */
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: theme('colors.neutral.200');
+  }
+
+  .dark *,
+  .dark ::after,
+  .dark ::before,
+  .dark ::backdrop,
+  .dark ::file-selector-button {
+    border-color: theme('colors.neutral.800');
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+/* Custom Utility Classes */
+@layer utilities {
+  /* Premium Card Styles */
+  .card-premium {
+    @apply bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-3xl shadow-sm transition-all duration-300;
+  }
+  
+  .card-premium-hover {
+    @apply hover:border-orange-500/50 hover:shadow-xl hover:shadow-orange-500/10 hover:-translate-y-1;
+  }
+
+  /* Button Primary */
+  .btn-primary {
+    @apply px-8 py-3.5 rounded-2xl bg-orange-500 hover:bg-orange-600 text-white font-bold transition-all duration-300 shadow-lg shadow-orange-500/20 active:scale-95 disabled:opacity-50 disabled:pointer-events-none;
+  }
+
+  /* Button Outline */
+  .btn-outline {
+    @apply px-8 py-3.5 rounded-2xl border-2 border-neutral-200 dark:border-neutral-800 text-neutral-900 dark:text-neutral-100 font-bold hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-all duration-300 active:scale-95;
+  }
+
+  /* Nav Link */
+  .nav-link {
+    @apply text-neutral-600 dark:text-neutral-400 hover:text-orange-500 dark:hover:text-orange-500 transition-colors duration-200 font-bold;
+  }
+
+  /* Section Padding */
+  .section-padding {
+    @apply px-4 py-16 md:py-24 max-w-[85rem] mx-auto;
+  }
+
+  /* Scrollbar Hide */
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* Text Selection */
+::selection {
+  @apply bg-orange-500 text-white;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-up {
+  animation: fadeInUp 0.5s ease-out forwards;
+}

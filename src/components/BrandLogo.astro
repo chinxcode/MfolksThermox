@@ -1,0 +1,14 @@
+---
+import { Image } from "astro:assets";
+import logo from "@images/logo.png";
+
+const { class: className } = Astro.props;
+---
+
+<Image
+  src={logo}
+  alt="MFOLKS Geotrix Logo"
+  class={`${className} object-contain`}
+  draggable={"false"}
+  loading={"eager"}
+/>

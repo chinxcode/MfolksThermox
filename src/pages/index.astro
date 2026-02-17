@@ -1,0 +1,225 @@
+---
+// Import the necessary components
+import MainLayout from "@layouts/MainLayout.astro";
+import HeroSection from "@components/sections/landing/HeroSection.astro";
+import ClientsSection from "@components/sections/landing/ClientsSection.astro";
+import FeaturesGeneral from "@components/sections/features/FeaturesGeneral.astro";
+import FeaturesNavs from "@components/sections/features/FeaturesNavs.astro";
+import TestimonialsSection from "@components/sections/testimonials/TestimonialsSection.astro";
+import HeroSectionAlt from "@components/sections/landing/HeroSectionAlt.astro";
+import features from "@data/features.json";
+import { partnersData } from "@data/constants";
+
+// Import images
+import heroImage from "@images/hero-main.webp";
+import industriesImage from "@images/industries-serve.webp";
+import earthingImage from "@images/earthing-solutions.png";
+import lightningImage from "@images/lightning-protection.png";
+import solarImage from "@images/construction-image.avif";
+import cableManagementImage from "@images/cable-management.png";
+import conductorsImage from "@images/conductors-cables.png";
+import manufacturingImage from "@images/construction-workers.avif";
+import testingImage from "@images/using-tools.avif";
+import whyChooseImage from "@images/why-choose.webp";
+
+import FeaturesStats from "@components/sections/features/FeaturesStats.astro";
+import FeaturesStatsAlt from "@components/sections/features/FeaturesStatsAlt.astro";
+
+//  IMAGE GENERATION PROMPTS:
+//  1. heroImage: "Industrial earthing rod installation at a solar power plant, professional工程 site, high-quality copper bonded rod being installed, safety equipment, blue sky, modern industrial setting, photorealistic"
+//  2. featureImage: "MFOLKS Geotrix earthing and lightning protection products floating on white background, copper rods, lightning arrestors, earthing strips, professional product photography, studio lighting"
+//  3. dashboardImage: "Technical diagram of earthing system installation, CAD drawing style, showing earth pit, electrode placement, connection details, professional engineering blueprint"
+//  4. industrialImage: "Large-scale industrial facility with lightning protection system visible, factory buildings, lightning arrestor on roof, earthing grid, aerial view, professional photography"
+//  5. solarImage: "Solar panel installation with earthing system, rows of solar panels, copper earthing infrastructure, professional installation, sunny day, modern renewable energy"
+
+const avatarSrcs: Array<string> = [
+  "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=faces",
+  "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&h=300&fit=crop&crop=faces",
+  "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=faces",
+  "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=300&h=300&fit=crop&crop=faces",
+];
+---
+
+<MainLayout>
+  <HeroSection
+    title=`Protect Your Infrastructure with <span class="text-yellow-500 dark:text-yellow-400">MFOLKS Geotrix</span>`
+    subTitle="Manufacturer of Earthing & Lightning Protection Solutions engineered for safety, compliance, and reliability."
+    primaryBtn="View Products"
+    primaryBtnURL="/products"
+    secondaryBtn="Request Quote"
+    secondaryBtnURL="/contact-us"
+    withReview={true}
+    avatars={avatarSrcs}
+    rating=`<span class="font-bold">4.9</span> / 5`
+    starCount={5}
+    reviews=`From Over <span class="font-bold">500+</span> Projects`
+    src={heroImage}
+    alt="MFOLKS Geotrix earthing rod system at industrial site"
+  />
+
+  <FeaturesStats
+    title="25+ Years of Manufacturing Excellence"
+    subTitle="MFOLKS Geotrix is a specialized manufacturer and supplier of comprehensive electrical safety solutions. We focus on high-performance B2B and EPC supply chains, ensuring every project is backed by decades of technical expertise."
+    mainStatTitle="25+"
+    mainStatSubTitle="years of combined manufacturing & technical experience"
+    stats={[
+      {
+        stat: "100%",
+        description: "quality assurance & testing compliance",
+      },
+      {
+        stat: "500+",
+        description: "major projects across solar & infrastructure",
+      },
+      {
+        stat: "EPC",
+        description: "preferred partner for turnkey solutions",
+      },
+    ]}
+  />
+
+  <ClientsSection
+    title="Trusted by Industry Leaders"
+    subTitle="Powering safety systems for Solar Plants, Industries, and Infrastructure Projects across India."
+    partners={partnersData}
+  />
+
+  <FeaturesNavs
+    title=`Our Core <span class="text-yellow-500 dark:text-yellow-400">Product Categories</span>`
+    tabs={[
+      {
+        heading: "Earthing Solutions",
+        content:
+          "High-conductivity copper bonded rods, chemical earthing compounds, and GI/Copper strips designed for low-impedance grounding in any soil condition.",
+        svg: "tools",
+        src: earthingImage,
+        alt: "Professional earthing rod solution",
+        first: true,
+      },
+      {
+        heading: "Lightning Protection",
+        content:
+          "Advanced Early Streamer Emission (ESE) arrestors and conventional lightning protection systems engineered for maximum zone of protection.",
+        svg: "dashboard",
+        src: lightningImage,
+        alt: "ESE lightning arrestor on structural header",
+        second: true,
+      },
+      {
+        heading: "Conductors & Cables",
+        content:
+          "Substantial range of high-grade copper and aluminum conductors, earthing cables, and specialized wiring for industrial electrical networks.",
+        svg: "rocket",
+        src: conductorsImage,
+        alt: "High-grade conductors and electrical cables",
+      },
+      {
+        heading: "Cable Management",
+        content:
+          "Durable cable trays, raceways, and support systems designed for organized and safe routing of power and data cables in complex environments.",
+        svg: "puzzle",
+        src: cableManagementImage,
+        alt: "Professional cable management tray systems",
+      },
+      {
+        heading: "Power Distribution",
+        content:
+          "Safe and reliable electrical distribution boards, panels, and accessories tailored for heavy-duty industrial and commercial loads.",
+        svg: "sparks",
+        src: solarImage,
+        alt: "Industrial power distribution panel",
+      },
+    ]}
+  />
+
+  <FeaturesGeneral
+    title="Industries We Serve"
+    subTitle="MFOLKS Geotrix provides mission-critical protection for high-value assets across diverse sectors. Our solutions are engineered to meet the unique challenges of each environment."
+    src={industriesImage}
+    alt="MFOLKS Geotrix industrial applications across various sectors"
+    features={[
+      {
+        heading: "Solar Power Plants",
+        content: "Specialized grounding and lightning protection for large-scale PV arrays and inverter stations.",
+        svg: "house"
+      },
+      {
+        heading: "Infrastructure & Railways",
+        content: "Durable electrical safety solutions for metros, railways, and public transit networks.",
+        svg: "hammer"
+      },
+      {
+        heading: "Data Centers",
+        content: "Precision sub-1-ohm earthing for signal reference grids and ultra-sensitive IT hardware.",
+        svg: "dashboard"
+      },
+      {
+        heading: "Industrial Plants",
+        content: "Robust protection for manufacturing lines, chemical plants, and heavy engineering facilities.",
+        svg: "frame"
+      },
+      {
+        heading: "Commercial Buildings",
+        content: "Complete structural protection for skyscrapers, malls, and institutional campuses.",
+        svg: "community"
+      }
+    ]}
+  />
+
+  <FeaturesStatsAlt
+    title="Why Choose MFOLKS Geotrix"
+    subTitle="We don't just supply products; we deliver safety. Our commitment to excellence ensures your infrastructure is protected by the best in the industry."
+    benefits={[
+      "In-house manufacturing for total quality control",
+      "Rigorous testing compliant with IS & IEC standards",
+      "Custom technical solutions for complex sites",
+      "Reliable logistics and on-time project delivery"
+    ]}
+    src={whyChooseImage}
+    alt="High-quality MFOLKS Geotrix manufacturing process and expertise"
+  />
+
+  <TestimonialsSection
+    title="Proven Track Record"
+    subTitle="With over 500+ successful projects across India, MFOLKS Geotrix delivers reliable protection systems that stand the test of time."
+    testimonials={[
+      {
+        content:
+          "MFOLKS Geotrix provided exceptional earthing solutions for our 50MW solar plant. Their copper bonded rods and technical guidance ensured we met all compliance standards ahead of schedule.",
+        author: "Rajesh Kumar",
+        role: "Project Manager | SolarTech Energy",
+        avatarSrc:
+          "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=faces",
+      },
+    ]}
+    statistics={[
+      {
+        count: "500+",
+        description:
+          "projects completed — from solar plants to industrial facilities",
+      },
+      {
+        count: "100%",
+        description:
+          "compliance rate with IS, IEC, and international standards",
+      },
+      {
+        count: "25+",
+        description:
+          "years of combined experience in earthing and lightning protection",
+      },
+      {
+        count: "24/7",
+        description: "technical support for critical projects",
+      },
+    ]}
+  />
+
+
+  <HeroSectionAlt
+    title="Let's Protect Your Infrastructure Together"
+    subTitle="Contact our technical team for customized earthing and lightning protection solutions. We provide detailed site surveys, compliance documentation, and project design support."
+    url="/contact-us"
+    btnTitle="Consult Our Team"
+  />
+</MainLayout>

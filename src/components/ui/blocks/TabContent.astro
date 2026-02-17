@@ -1,0 +1,49 @@
+---
+// Import the Image component from astro:assets
+import { Image } from "astro:assets";
+
+// Destructure the component properties from Astro.props
+const { id, aria, src, alt, first } = Astro.props;
+
+// Define TypeScript interface for the properties
+interface Props {
+  id: string;
+  aria: string;
+  src?: any;
+  alt: string;
+  first?: boolean;
+}
+
+// Set base classes for the container
+// We use absolute positioning and opacity for smooth crossfading
+const baseClasses = "absolute inset-0 transition-opacity duration-700 ease-in-out";
+const activeClasses = first ? "opacity-100 z-10 active" : "opacity-0 z-0";
+---
+
+<!-- Container for tab content that controls visibility and accessibility -->
+<div 
+  id={id} 
+  role="tabpanel" 
+  class={`${baseClasses} ${activeClasses} [&.active]:opacity-100 [&.active]:z-10`} 
+  aria-labelledby={aria}
+>
+  <!-- Astro Image component with standardized aspect ratio and object-cover -->
+  <Image
+    src={src}
+    alt={alt}
+    class="h-full w-full object-cover rounded-xl shadow-xl shadow-neutral-200 dark:shadow-neutral-900/[.2]"
+    draggable={"false"}
+    format={"avif"}
+    loading={"eager"}
+  />
+</div>
+
+<style>
+  /* Ensure the container only shows when the parent has the active hidden state handled by Preline */
+  /* However, since we are doing custom crossfade, we override the default hidden behavior */
+  [role="tabpanel"].hidden {
+    display: block !important;
+    opacity: 0;
+    pointer-events: none;
+  }
+</style>

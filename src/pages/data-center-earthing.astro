@@ -1,0 +1,102 @@
+---
+import MainLayout from "@layouts/MainLayout.astro";
+import LandingPageTemplate from "@components/landing/LandingPageTemplate.astro";
+import { SITE } from "@data/constants";
+
+const pageTitle = "Data Center Earthing Solutions | IT Infrastructure Grounding | MFOLKS Geotrix";
+const metaDescription = "Specialized grounding systems for data centers and IT facilities. Low impedance earthing, signal reference grids, and surge protection for mission-critical infrastructure.";
+---
+
+<MainLayout
+  title={pageTitle}
+  customDescription={metaDescription}
+  structuredData={{
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: "Data Center Earthing Solutions",
+    description: metaDescription,
+    provider: {
+      "@type": "Organization",
+      name: "MFOLKS Geotrix Private Limited"
+    }
+  }}
+>
+  <LandingPageTemplate
+    hero={{
+      badge: "Industry Solution",
+      title: "Data Center Grounding Systems",
+      subtitle: "Mission-critical grounding solutions for data centers and IT facilities. Ultra-low impedance earthing, signal reference grids, and comprehensive surge protection."
+    }}
+    benefits={[
+      {
+        icon: "zap",
+        title: "Ultra-Low Impedance",
+        description: "Achieve <0.5Ω earth resistance critical for sensitive IT equipment and high-frequency operations."
+      },
+      {
+        icon: "grid",
+        title: "Signal Reference Grid",
+        description: "Copper mesh below raised floor for clean signal reference. Prevents ground loops and EMI issues."
+      },
+      {
+        icon: "shield",
+        title: "Surge Protection",
+        description: "Multi-layer SPD protection for UPS, PDU, server racks, and network equipment. Coordinated protection scheme."
+      },
+      {
+        icon: "checkCircle",
+        title: "Tier Compliant Design",
+        description: "Meet TIA-942 and Uptime Institute requirements for Tier II, III, and IV data centers."
+      },
+      {
+        icon: "clock",
+        title: "Redundant Grounding",
+        description: "Multiple earth pits, bonding networks, and backup grounding paths for fault tolerance."
+      },
+      {
+        icon: "tool",
+        title: "Testing & Commissioning",
+        description: "Comprehensive ground resistance, bond continuity, and SPD testing. Full documentation for compliance."
+      }
+    ]}
+    technicalSpecs={{
+      title: "System Components",
+      specs: [
+        { label: "Main Earthing System", value: "<0.5Ω (chemical/rod array)" },
+        { label: "Signal Reference Grid", value: "Copper mesh, 600mm spacing" },
+        { label: "Bonding Network", value: "Equipment racks, cable trays, HVAC" },
+        { label: "SPD Protection", value: "Type 1+2+3, coordinated" },
+        { label: "Lightning Protection", value: "ESE/Conventional + down conductors" },
+        { label: "Ground Bar", value: "Copper, centralized MGB/TMGB" },
+        { label: "Design Standards", value: "TIA-942, IEEE 1100" },
+        { label: "Testing Frequency", value: "Annual with reports" }
+      ]
+    }}
+    applications={[
+      "Enterprise Data Centers",
+      "Colocation Facilities",
+      "Cloud Service Providers",
+      "Telecom Network Operations Centers",
+      "Financial Trading Floors",
+      "Government IT Infrastructure",
+      "Disaster Recovery Sites",
+      "Edge Data Centers"
+    ]}
+    compliance={{
+      title: "Standards & Certifications",
+      standards: [
+        "TIA-942 (Data Center)",
+        "IEEE 1100 (Grounding)",
+        "Uptime Institute Tier Standards",
+        "IS/IEC 62305 (Lightning)",
+        "NFPA 70 (NEC)"
+      ]
+    }}
+    cta={{
+      title: "Protect Your Mission-Critical IT Infrastructure",
+      description: "Our data center specialists will design a comprehensive grounding and protection system meeting TIA-942 and Tier compliance requirements.",
+      buttonText: "Request Data Center Assessment",
+      buttonUrl: "/contact-us"
+    }}
+  />
+</MainLayout>

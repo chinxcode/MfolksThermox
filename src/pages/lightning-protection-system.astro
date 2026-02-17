@@ -1,0 +1,101 @@
+---
+import MainLayout from "@layouts/MainLayout.astro";
+import LandingPageTemplate from "@components/landing/LandingPageTemplate.astro";
+import { SITE } from "@data/constants";
+
+const pageTitle = "ESE Lightning Arrestor Manufacturer | Advanced Lightning Protection | MFOLKS Geotrix";
+const metaDescription = "Early Streamer Emission (ESE) and conventional lightning protection systems. Protect structures up to 100m radius. IS/IEC 62305 compliant design, supply, and installation.";
+---
+
+<MainLayout
+  title={pageTitle}
+  customDescription={metaDescription}
+  structuredData={{
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: "ESE Lightning Arrestor",
+    description: metaDescription,
+    brand: {
+      "@type": "Brand",
+      name: "MFOLKS Geotrix"
+    }
+  }}
+>
+  <LandingPageTemplate
+    hero={{
+      badge: "Product Solution",
+      title: "Lightning Arrestor & ESE Systems",
+      subtitle: "Comprehensive lightning protection with Early Streamer Emission technology and conventional systems. Protect industrial structures, buildings, and critical infrastructure."
+    }}
+    benefits={[
+      {
+        icon: "zap",
+        title: "ESE Technology",
+        description: "Advanced early streamer emission arrestors with 60µs to 100µs advancement. Protection radius up to 100 meters."
+      },
+      {
+        icon: "shield",
+        title: "Structural Protection",
+        description: "Complete structural lightning protection systems designed per IS/IEC 62305. Risk assessment included."
+      },
+      {
+        icon: "checkCircle",
+        title: "Third-Party Certified",
+        description: "ESE terminals tested and certified by accredited international laboratories. Full compliance documentation."
+      },
+      {
+        icon: "tool",
+        title: "Turnkey Installation",
+        description: "Design, supply, installation, and commissioning. Complete air termination, down conductor, and grounding systems."
+      },
+      {
+        icon: "clock",
+        title: "Surge Protection",
+        description: "Integrated SPD (surge protection device) solutions for electrical panels, IT equipment, and process controls."
+      },
+      {
+        icon: "award",
+        title: "Performance Warranty",
+        description: "10-year material warranty with annual inspection and maintenance support."
+      }
+    ]}
+    technicalSpecs={{
+      title: "System Components",
+      specs: [
+        { label: "ESE Terminals", value: "60µs, 75µs, 100µs variants" },
+        { label: "Protection Radius", value: "Up to 100m (height dependent)" },
+        { label: "Down Conductors", value: "Copper/Aluminum, 50-70mm²" },
+        { label: "Earthing System", value: "Chemical/Rod electrodes, <1Ω" },
+        { label: "Surge Arrestors", value: "Type 1+2+3 SPDs" },
+        { label: "Lightning Protection Level", value: "LPL I, II, III, IV" },
+        { label: "Strike Current", value: "Up to 200kA" },
+        { label: "Compliance", value: "IS/IEC 62305, NFC 17-102" }
+      ]
+    }}
+    applications={[
+      "Industrial Manufacturing Plants",
+      "Commercial High-Rise Buildings",
+      "Telecom Towers & Data Centers",
+      "Oil & Gas Refineries",
+      "Power Substations",
+      "Airports & Infrastructure",
+      "Hospitals & Institutions",
+      "Warehouses & Storage Facilities"
+    ]}
+    compliance={{
+      title: "Standards & Certifications",
+      standards: [
+        "IS/IEC 62305-1 to 4",
+        "NFC 17-102 (France)",
+        "UNE 21186 (Spain)",
+        "IEEE C62.11"
+      ]
+    }}
+    cta={{
+      title: "Protect Your Infrastructure from Lightning",
+      description: "Schedule a lightning risk assessment with our protection specialists. We'll design a compliant system tailored to your structure.",
+      buttonText: "Request Risk Assessment",
+      buttonUrl: "/contact-us"
+    }}
+  />
+</MainLayout>

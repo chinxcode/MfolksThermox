@@ -1,0 +1,101 @@
+---
+import MainLayout from "@layouts/MainLayout.astro";
+import LandingPageTemplate from "@components/landing/LandingPageTemplate.astro";
+import { SITE } from "@data/constants";
+
+const pageTitle = "Chemical Earthing System Manufacturer | Maintenance-Free Grounding | MFOLKS Geotrix";
+const metaDescription = "Maintenance-free chemical earthing electrodes for industrial applications. Low resistance, stable performance, and long-term reliability. IS/IEC compliant systems.";
+---
+
+<MainLayout
+  title={pageTitle}
+  customDescription={metaDescription}
+  structuredData={{
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: "Chemical Earthing System",
+    description: metaDescription,
+    brand: {
+      "@type": "Brand",
+      name: "MFOLKS Geotrix"
+    }
+  }}
+>
+  <LandingPageTemplate
+    hero={{
+      badge: "Product Solution",
+      title: "Chemical Earthing Systems",
+      subtitle: "Maintenance-free chemical electrodes designed for low resistance earthing in high resistivity soil. Pre-filled with conductive compound for stable, long-term performance."
+    }}
+    benefits={[
+      {
+        icon: "zap",
+        title: "Ultra-Low Resistance",
+        description: "Achieve sub-1 ohm resistance even in rocky, dry, or sandy soil conditions where conventional rods fail."
+      },
+      {
+        icon: "checkCircle",
+        title: "Maintenance-Free",
+        description: "Pre-filled with hygroscopic compound that retains moisture and maintains conductivity for 10+ years."
+      },
+      {
+        icon: "shield",
+        title: "Corrosion Resistant",
+        description: "GI/copper construction with chemical backfill prevents electrode degradation and maintains performance."
+      },
+      {
+        icon: "clock",
+        title: "Quick Installation",
+        description: "Single-bore installation with minimal excavation. Operational within 24-48 hours after installation."
+      },
+      {
+        icon: "tool",
+        title: "Suitable for Difficult Soil",
+        description: "Engineered for high resistivity soil (>500 Ω-m), rocky terrain, and water-scarce areas."
+      },
+      {
+        icon: "award",
+        title: "Performance Guarantee",
+        description: "Guaranteed earth resistance values with 10-year material and performance warranty."
+      }
+    ]}
+    technicalSpecs={{
+      title: "Technical Specifications",
+      specs: [
+        { label: "Electrode Material", value: "GI Pipe / Copper Tube" },
+        { label: "Backfill Compound", value: "Hygroscopic Chemical Mix" },
+        { label: "Standard Lengths", value: "3m, 4m, 6m" },
+        { label: "Pipe Diameter", value: "50mm, 80mm, 100mm" },
+        { label: "Typical Resistance", value: "<1 Ω (site dependent)" },
+        { label: "Soil Resistivity Range", value: "100 - 3000 Ω-m" },
+        { label: "Lifespan", value: "10+ years (maintenance-free)" },
+        { label: "Compliance", value: "IS 3043, IEC 62561" }
+      ]
+    }}
+    applications={[
+      "Telecom Towers & BTS Sites",
+      "Substation Grounding (33kV/11kV)",
+      "Industrial Plants in Rocky Areas",
+      "Desert & Arid Region Projects",
+      "Remote Infrastructure Sites",
+      "Highway Toll Plazas",
+      "Wind & Solar Farms",
+      "Oil & Gas Installations"
+    ]}
+    compliance={{
+      title: "Standards & Certifications",
+      standards: [
+        "IS 3043",
+        "IEC 62561",
+        "IEEE 80",
+        "IS/IEC 62305"
+      ]
+    }}
+    cta={{
+      title: "Get Chemical Earthing Solution",
+      description: "Our earthing specialists will analyze your soil conditions and design a maintenance-free grounding system with guaranteed performance.",
+      buttonText: "Request Site Assessment",
+      buttonUrl: "/contact-us"
+    }}
+  />
+</MainLayout>
