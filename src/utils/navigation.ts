@@ -1,6 +1,7 @@
 // An array of links for navigation bar
 const navBarLinks = [
   { name: "Products", url: "/products" },
+  { name: "Services", url: "/services" },
   { name: "Applications", url: "/applications" },
 ];
 // An array of links for footer
@@ -8,25 +9,25 @@ const footerLinks = [
   {
     section: "Product Solutions",
     links: [
-      { name: "Copper Bonded Rods", url: "/copper-bonded-earthing-rod" },
-      { name: "Chemical Earthing", url: "/chemical-earthing-system" },
-      { name: "Lightning Arrestors", url: "/lightning-protection-system" },
+      { name: "Thermal Spray Wires", url: "/thermal-spray-wires" },
+      { name: "Thermal Spray Powders", url: "/thermal-spray-powders" },
+      { name: "Spray Equipment", url: "/thermal-spray-coating-equipment" },
       { name: "All Products", url: "/products" },
     ],
   },
   {
     section: "Industry Solutions",
     links: [
-      { name: "Solar Plant Earthing", url: "/solar-plant-earthing" },
-      { name: "Industrial Grounding", url: "/industrial-plant-grounding" },
-      { name: "Data Center Earthing", url: "/data-center-earthing" },
+      { name: "Anti-Corrosion", url: "/anti-corrosion-coatings" },
+      { name: "Wear Resistance", url: "/wear-resistance" },
+      { name: "Surface Restoration", url: "/surface-restoration" },
       { name: "By Industry", url: "/applications" },
     ],
   },
   {
     section: "Resources",
     links: [
-      { name: "Low Resistance Earthing", url: "/low-resistance-earthing" },
+      { name: "Our Services", url: "/services" },
       { name: "Quality Standards", url: "/quality" },
     ],
   },
@@ -34,7 +35,7 @@ const footerLinks = [
     section: "Company",
     links: [
       { name: "About Us", url: "/about" },
-      { name: "Contact", url: "/contact-us" },
+      { name: "Contact", url: "/contact" },
       { name: "Request Quote", url: "/cart" },
     ],
   },

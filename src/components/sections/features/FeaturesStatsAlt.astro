@@ -1,6 +1,5 @@
 ---
 import { Image } from "astro:assets";
-import product5 from "@images/features-image.avif";
 
 // Define props from Astro
 const { title, subTitle, benefits, src, alt } = Astro.props;
@@ -15,7 +14,7 @@ interface Props {
 }
 
 // Define SVG marker to be used in the component
-const ListItemMarker: string = `<svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="mt-0.5 h-6 w-6 text-orange-400 dark:text-orange-300 flex-none"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>`;
+const ListItemMarker: string = `<svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="mt-0.5 h-6 w-6 text-blue-400 dark:text-blue-300 flex-none"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>`;
 ---
 
 <section
@@ -25,10 +24,13 @@ const ListItemMarker: string = `<svg fill="none" viewBox="0 0 24 24" stroke-widt
   <div class="lg:grid lg:grid-cols-12 lg:items-center lg:gap-16">
     <div class="lg:col-span-7">
       <div class="aspect-square w-full overflow-hidden rounded-xl">
-        <Image 
-          class="h-full w-full object-cover" 
-          src={src || product5} 
-          alt={alt || "MFOLKS Geotrix professional solutions"} 
+        <Image
+          class="h-full w-full object-cover"
+          src={src}
+          alt={alt}
+          draggable={"false"}
+          format={"avif"}
+          inferSize={true}
         />
       </div>
     </div>
@@ -66,3 +68,4 @@ const ListItemMarker: string = `<svg fill="none" viewBox="0 0 24 24" stroke-widt
     </div>
   </div>
 </section>
+

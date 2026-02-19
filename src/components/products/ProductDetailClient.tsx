@@ -21,7 +21,7 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
         <p className="text-neutral-600 dark:text-neutral-400 mb-4">
           Contact us for pricing and availability.
         </p>
-        <a href="/contact-us" className="inline-block w-full py-3 px-4 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-lg transition-colors">
+        <a href="/contact-us" className="inline-block w-full py-3 px-4 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-lg transition-colors">
           Request Quote
         </a>
       </div>
@@ -56,8 +56,12 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
       {/* Header */}
       <div className="pb-4 border-b border-neutral-100 dark:border-neutral-700">
         <div className="text-sm font-bold text-neutral-400 uppercase tracking-widest mb-1">Pricing & Configuration</div>
-        {currentVariant.variantPriceType === 'on_request' ? (
-          <div className="text-2xl font-bold text-orange-500">Price on Request</div>
+        {
+          (Array.isArray(currentVariant.variantPriceType) 
+            ? currentVariant.variantPriceType.includes('on_request') 
+            : currentVariant.variantPriceType === 'on_request') 
+          || !currentVariant.variantPrice ? (
+          <div className="text-2xl font-bold text-blue-500">Price on Request</div>
         ) : (
           <>
             <div className="flex items-baseline gap-1">
@@ -83,8 +87,10 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
             )}
           </>
         )}
-        {currentVariant.variantPriceType === 'indicative' && (
-          <p className="text-xs text-orange-600 dark:text-orange-400 mt-1 font-medium bg-orange-50 dark:bg-orange-900/30 inline-block px-2 py-1 rounded">
+        {(Array.isArray(currentVariant.variantPriceType) 
+          ? currentVariant.variantPriceType.includes('indicative') 
+          : currentVariant.variantPriceType === 'indicative') && (
+          <p className="text-xs text-blue-600 dark:text-blue-400 mt-1 font-medium bg-blue-50 dark:bg-blue-900/30 inline-block px-2 py-1 rounded">
             * Indicative Ex-Works Price
           </p>
         )}
@@ -99,7 +105,7 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
           <select
             value={selectedVariant}
             onChange={(e) => setSelectedVariant(Number(e.target.value))}
-            className="w-full pl-4 pr-10 py-3 rounded-xl border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 appearance-none transition-shadow font-medium text-sm"
+            className="w-full pl-4 pr-10 py-3 rounded-xl border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 appearance-none transition-shadow font-medium text-sm"
           >
             {variants.map((variant: any, index: number) => (
               <option key={variant.variantSku} value={index}>
@@ -124,7 +130,7 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
           <div className="flex items-center gap-3 bg-neutral-100 dark:bg-neutral-800 p-1 rounded-lg border border-neutral-200 dark:border-neutral-700">
             <button
               onClick={() => setQuantity(Math.max(1, quantity - 1))}
-              className="w-8 h-8 flex items-center justify-center rounded-md bg-white dark:bg-neutral-700 text-neutral-600 dark:text-neutral-200 shadow-sm hover:text-orange-500 transition-colors"
+              className="w-8 h-8 flex items-center justify-center rounded-md bg-white dark:bg-neutral-700 text-neutral-600 dark:text-neutral-200 shadow-sm hover:text-blue-500 transition-colors"
             >
               −
             </button>
@@ -136,7 +142,7 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
             />
             <button
               onClick={() => setQuantity(quantity + 1)}
-              className="w-8 h-8 flex items-center justify-center rounded-md bg-white dark:bg-neutral-700 text-neutral-600 dark:text-neutral-200 shadow-sm hover:text-orange-500 transition-colors"
+              className="w-8 h-8 flex items-center justify-center rounded-md bg-white dark:bg-neutral-700 text-neutral-600 dark:text-neutral-200 shadow-sm hover:text-blue-500 transition-colors"
             >
               +
             </button>
@@ -148,7 +154,7 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
             onClick={handleAddToCart}
             className={`w-full py-3.5 px-4 rounded-xl font-bold text-center transition-all duration-300 shadow-lg ${added
               ? 'bg-green-600 text-white shadow-green-200'
-              : 'bg-orange-500 hover:bg-orange-600 text-white shadow-orange-200 dark:shadow-none'
+              : 'bg-blue-500 hover:bg-blue-600 text-white shadow-blue-200 dark:shadow-none'
               }`}
           >
             {added ? (
@@ -162,7 +168,7 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
           </button>
           <a
             href="/contact-us"
-            className="w-full py-3.5 px-4 border-2 border-neutral-200 dark:border-neutral-700 text-neutral-600 dark:text-neutral-300 font-bold rounded-xl text-center hover:border-orange-500 hover:text-orange-500 transition-colors"
+            className="w-full py-3.5 px-4 border-2 border-neutral-200 dark:border-neutral-700 text-neutral-600 dark:text-neutral-300 font-bold rounded-xl text-center hover:border-blue-500 hover:text-blue-500 transition-colors"
           >
             Request Formal Quote
           </a>
@@ -171,3 +177,4 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
     </div>
   );
 }
+

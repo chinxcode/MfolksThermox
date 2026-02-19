@@ -6,15 +6,14 @@ import LeftSection from "@components/ui/blocks/LeftSection.astro";
 import RightSection from "@components/ui/blocks/RightSection.astro";
 import FeaturesGeneral from "@components/sections/features/FeaturesGeneral.astro";
 import { SITE } from "@data/constants";
+import { qualityContent } from "@data/new_content";
 
-// Import images
-import manufacturingBg from "@images/manufacturing-bg.png";
-import personWorking from "@images/person-working.avif"; 
-import blueprints from "@images/blueprints-image.avif";
-import underConstruction from "@images/under-construction.avif";
+// Define placeholder image function
+const getPlaceholder = (text: string) =>
+  `https://placehold.co/1000x600?text=${encodeURIComponent(text)}`;
 
 const pageTitle = `Quality Assurance | ${SITE.title}`;
-const metaDescription = "MFOLKS Geotrix is committed to delivering consistent earthing and electrical protection components. Reliability over hype, process discipline over promises.";
+const metaDescription = qualityContent.description;
 
 interface Article {
   isRightSection: boolean;
@@ -35,73 +34,68 @@ interface Article {
 const articles: Article[] = [
   {
     isRightSection: true,
-    title: "Our Quality Commitment",
+    title: "Quality as Culture",
     subTitle:
-      "Quality is not treated as a marketing statement — it is embedded in how materials are selected, processed, inspected, and released. Every product is manufactured under structured process controls designed to maintain dimensional consistency and performance reliability. Our focus areas include controlled material sourcing, defined manufacturing procedures, and documentation discipline.",
+      "At MFOLKS, quality is a daily practice, not just a standard - we ensure every product meets customer and industry expectations. Our commitment to excellence ensures your infrastructure is protected by the best in the industry.",
     single: false,
-    imgOne: personWorking,
-    imgOneAlt: "Quality inspection process",
-    imgTwo: blueprints, 
-    imgTwoAlt: "Technical specifications",
+    imgOne: getPlaceholder("Quality Control"),
+    imgOneAlt: "Quality inspection in progress",
+    imgTwo: getPlaceholder("Technical Specs"),
+    imgTwoAlt: "Technical data sheets and specifications",
   },
   {
     isRightSection: false,
-    title: "Built for Infrastructure & EPC Supply",
+    title: "Empowered Workforce",
     subTitle:
-      "Infrastructure and industrial projects require predictable quality and dependable supply. Our production workflow is organized to support repeatable manufacturing without bypassing inspection discipline. We support project requirements through batch-controlled manufacturing, defined tolerance checks, and full traceability practices.",
-    img: manufacturingBg,
-    imgAlt: "Industrial infrastructure manufacturing",
+      "Our team is well-trained, aware of quality responsibilities, and empowered to maintain high standards. We believe that skilled hands and sharp minds are the best tools for quality assurance.",
+    img: getPlaceholder("Skilled Workforce"),
+    imgAlt: "Team members collaborating on quality check",
     btnExists: true,
     btnTitle: "Enquire for Project Supply",
     btnURL: "/contact",
   },
   {
     isRightSection: true,
-    title: "Packaging & Traceability",
+    title: "Continuous Improvement",
     subTitle:
-      "Products are packed using industrial-grade protective methods to minimize transit damage and maintain identification. Where required, supporting documentation includes material references, inspection records, and warranty information to link production batches to supplied components.",
+      "We regularly review our quality objectives to drive process improvements and ensure long-term customer satisfaction. Feedback from production and field installations is used to refine processes and improve consistency.",
     single: true,
-    imgOne: underConstruction, 
-    imgOneAlt: "Logistics and packaging integrity",
-  }
+    imgOne: getPlaceholder("Process Improvement"),
+    imgOneAlt: "Process optimization chart",
+  },
 ];
 
 const qualityFeatures = [
   {
     heading: "Raw Material Verification",
     content:
-      "Incoming materials are evaluated against internal acceptance criteria to confirm suitability for manufacturing.",
-    svg: "shield", 
+      "Rigorous testing of incoming aluminium, zinc, and alloy materials.",
+    svg: "shield",
   },
   {
     heading: "Process Control",
     content:
-      "Manufacturing steps follow documented procedures to maintain coating integrity, dimensional accuracy, and repeatability.",
-    svg: "settings", 
+      "Defined manufacturing procedures to ensure wire diameter and surface finish consistency.",
+    svg: "settings",
   },
   {
     heading: "Inspection & Validation",
-    content:
-      "Products are visually and dimensionally inspected to verify conformity before dispatch.",
+    content: "Visual and dimensional inspection of every spool and batch.",
     svg: "verified",
   },
   {
-    heading: "Release Review",
-    content:
-      "Final checks ensure documentation alignment and batch traceability prior to shipment.",
+    heading: "Traceability",
+    content: "Complete batch tracking from raw material to final dispatch.",
     svg: "books",
   },
 ];
 ---
 
-<MainLayout
-  title={pageTitle}
-  customDescription={metaDescription}
->
+<MainLayout title={pageTitle} customDescription={metaDescription}>
   <!-- Hero Section -->
   <MainSection
     title="Quality Without Compromise"
-    subTitle="Built for Infrastructure & Industrial Reliability. MFOLKS Geotrix is committed to delivering consistent earthing and electrical protection components for infrastructure and industrial applications. Our manufacturing and inspection processes focus on repeatability, safety, and dependable field performance."
+    subTitle={qualityContent.description}
     btnExists={true}
     btnTitle="Request Quality Documentation"
     btnURL="/contact"
@@ -143,41 +137,61 @@ const qualityFeatures = [
     subTitle="Quality checks are integrated throughout production rather than treated as a final-stage activity."
     features={qualityFeatures}
   />
-  
+
   <!-- Structured Quality Framework Text Section -->
   <div class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
-      <div class="grid md:grid-cols-2 gap-12">
-        <div>
-            <h3 class="text-2xl font-bold text-neutral-800 dark:text-neutral-200 mb-4">Structured Quality Framework</h3>
-            <p class="text-neutral-600 dark:text-neutral-400 mb-6">
-                Our quality framework emphasizes disciplined manufacturing practices rather than exaggerated claims. It focuses on process consistency, supplier evaluation, inspection checkpoints, and documentation control. This structure supports long-term reliability in demanding installations.
-            </p>
-        </div>
-        <div>
-            <h3 class="text-2xl font-bold text-neutral-800 dark:text-neutral-200 mb-4">Continuous Improvement</h3>
-            <p class="text-neutral-600 dark:text-neutral-400 mb-6">
-                Feedback from production and field installations is used to refine processes and improve consistency. Quality is treated as an evolving system, not a static benchmark.
-            </p>
-        </div>
+    <div class="grid md:grid-cols-2 gap-12">
+      <div>
+        <h3
+          class="text-2xl font-bold text-neutral-800 dark:text-neutral-200 mb-4"
+        >
+          Structured Quality Framework
+        </h3>
+        <p class="text-neutral-600 dark:text-neutral-400 mb-6">
+          Our quality framework emphasizes disciplined manufacturing practices.
+          It focuses on process consistency, supplier evaluation, inspection
+          checkpoints, and documentation control.
+        </p>
       </div>
+      <div>
+        <h3
+          class="text-2xl font-bold text-neutral-800 dark:text-neutral-200 mb-4"
+        >
+          Industry Standards
+        </h3>
+        <p class="text-neutral-600 dark:text-neutral-400 mb-6">
+          We adhere to relevant IS and international standards for thermal spray
+          wires and powders, ensuring global compatibility and performance.
+        </p>
+      </div>
+    </div>
   </div>
 
   <!-- Technical Support CTA -->
-  <div class="bg-neutral-50 dark:bg-neutral-900 border-y border-neutral-200 dark:border-neutral-700">
-      <div class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 text-center">
-          <h2 class="text-3xl font-bold text-neutral-800 dark:text-neutral-200 mb-4">Technical Support & Enquiries</h2>
-          <p class="text-neutral-600 dark:text-neutral-400 mb-8 max-w-2xl mx-auto">
-              For inspection documentation, project requirements, or technical clarification, our engineering team is ready to assist.
-          </p>
-          <div class="flex flex-wrap justify-center gap-4">
-             <a href="/contact" class="inline-flex justify-center items-center gap-x-3 text-center bg-orange-500 hover:bg-orange-600 border border-transparent text-white text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-white transition py-3 px-4 dark:focus:ring-offset-gray-800">
-                Contact Our Technical Team
-             </a>
-             <a href="/products" class="inline-flex justify-center items-center gap-x-3 text-center bg-white hover:bg-gray-50 border border-gray-200 text-gray-800 text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-white transition py-3 px-4 dark:bg-neutral-800 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-700">
-                Request Product Information
-             </a>
-          </div>
+  <div
+    class="bg-neutral-50 dark:bg-neutral-900 border-y border-neutral-200 dark:border-neutral-700"
+  >
+    <div
+      class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 text-center"
+    >
+      <h2
+        class="text-3xl font-bold text-neutral-800 dark:text-neutral-200 mb-4"
+      >
+        Technical Support & Enquiries
+      </h2>
+      <p class="text-neutral-600 dark:text-neutral-400 mb-8 max-w-2xl mx-auto">
+        For inspection documentation, project requirements, or technical
+        clarification, our engineering team is ready to assist.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a
+          href="/contact"
+          class="inline-flex justify-center items-center gap-x-3 text-center bg-blue-500 hover:bg-blue-600 border border-transparent text-white text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-white transition py-3 px-4 dark:focus:ring-offset-gray-800"
+        >
+          Contact Our Technical Team
+        </a>
       </div>
+    </div>
   </div>
-
 </MainLayout>
+

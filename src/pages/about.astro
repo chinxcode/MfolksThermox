@@ -6,16 +6,14 @@ import LeftSection from "@components/ui/blocks/LeftSection.astro";
 import RightSection from "@components/ui/blocks/RightSection.astro";
 import FeaturesGeneral from "@components/sections/features/FeaturesGeneral.astro";
 import { SITE } from "@data/constants";
+import { aboutContent } from "@data/new_content";
 
-// Import images
-import manufacturingImage from "@images/construction-workers.avif";
-import qualityLabImage from "@images/person-working.avif"; 
-import industrialSiteImage from "@images/progress-building.avif";
-import certificationsImage from "@images/blueprints-image.avif";
-import productionImage from "@images/under-construction.avif";
+// Define placeholder image function
+const getPlaceholder = (text: string) =>
+  `https://placehold.co/1000x600?text=${encodeURIComponent(text)}`;
 
 const pageTitle = `About Us | ${SITE.title}`;
-const metaDescription = "MFOLKS Geotrix is a manufacturer of earthing, lightning protection, and electrical grounding components designed for infrastructure and industrial applications.";
+const metaDescription = aboutContent.description;
 
 interface Article {
   isRightSection: boolean;
@@ -36,72 +34,69 @@ interface Article {
 const articles: Article[] = [
   {
     isRightSection: true,
-    title: "Manufacturing Experience",
+    title: "1958 Legacy & Expertise",
     subTitle:
-      "Our manufacturing approach is built around structured processes and repeatability. Each stage of production is guided by defined procedures to maintain dimensional consistency, coating integrity, and installation reliability. Experience in supplying infrastructure and industrial projects has shaped how we approach manufacturing: controlled material sourcing, defined production workflows, batch traceability practices, and inspection checkpoints.",
+      "With roots tracing back to 1958, MFOLKS comes from one of India's oldest business groups in the aluminium and copper ecosystem. Over the decades, we've built deep expertise and are channeling that experience into thermal spray technology.",
     single: true,
-    imgOne: manufacturingImage,
-    imgOneAlt: "Manufacturing process experience",
+    imgOne: getPlaceholder("1958 Legacy"),
+    imgOneAlt: "Vintage industrial photo representing 1958 legacy",
   },
   {
     isRightSection: false,
-    title: "Production Capability",
+    title: "Manufacturing Excellence in Rajasthan & Gujarat",
     subTitle:
-      "Production capability is not measured only by output volume, but by the ability to maintain uniform quality across batches. Our facility workflow is organized to support repeatable manufacturing for project requirements, scalable production planning, and consistent dimensional checks. This allows us to support infrastructure projects without bypassing quality discipline or process control.",
-    img: productionImage,
-    imgAlt: "Production and facility capability",
+      "Our Manufacturing Units are located in the industrial townships of Bhiwadi and Chopanki (Rajasthan) and Narol, Ahmedabad (Gujarat). Spread over 12,000 sq. mtrs., we have an installed capacity of 30,000 M.Ts. of Aluminium Products and 6,000 Km of LT Power Cable per annum.",
+    img: getPlaceholder("Manufacturing Facility"),
+    imgAlt: "Aerial view of manufacturing units in Bhiwadi and Ahmedabad",
   },
   {
     isRightSection: true,
-    title: "Facility & Operational Presence",
+    title: "Mission: Durability & Performance",
     subTitle:
-      "Manufacturing and inspection activities are coordinated through a structured operational environment designed for industrial component production. Our facility practices emphasize organized material flow, defined production stages, inspection discipline, and traceability awareness. This operational structure supports reliable supply and smoother coordination with installation teams and EPC contractors.",
+      "Our goal is simple: to create spray wires that last longer, perform better, and keep your equipment running reliably. Whether it's corrosion protection, part restoration or surface strengthening, our solutions are made to deliver and made to last.",
     single: true,
-    imgOne: industrialSiteImage,
-    imgOneAlt: "Operational facility",
+    imgOne: getPlaceholder("Durability Testing"),
+    imgOneAlt: "Laboratory testing of thermal spray wire durability",
   },
-   {
+  {
     isRightSection: false,
-    title: "Compliance & Standards Alignment",
+    title: "Customer-Centric Approach",
     subTitle:
-      "Electrical grounding and protection systems demand adherence to recognized practices. Our manufacturing and inspection processes are aligned with relevant industry expectations and project specifications. Compliance support includes reference to applicable guidelines, inspection documentation, and material traceability.",
-    img: certificationsImage,
-    imgAlt: "Compliance documentation",
+      "At MFOLKS, we're more than just manufacturers. We're listeners, collaborators, and problem solvers. As the demand for advanced surface technologies grows, we're here to support you with dependable products and technical clarity.",
+    img: getPlaceholder("Customer Collaboration"),
+    imgAlt: "Engineers collaborating with clients on site",
   },
 ];
 
 const supportFeatures = [
   {
-    heading: "Industrial Facilities",
-    content: "Dependable components for manufacturing plants and heavy industries.",
-    svg: "building", 
+    heading: "Power Sector",
+    content: "Boilers, turbines, and structural protection.",
+    svg: "building",
   },
   {
-    heading: "Infrastructure Projects",
-    content: "Reliable grounding for public works, transport, and utilities.",
-    svg: "hammer", 
+    heading: "Infrastructure",
+    content: "Bridges, railways, and public works corrosion control.",
+    svg: "hammer",
   },
   {
-    heading: "Electrical Grounding",
-    content: "Components designed for low-impedance earth termination systems.",
-    svg: "sparks", 
+    heading: "Oil & Gas",
+    content: "Refineries, pipelines, and offshore assets.",
+    svg: "sparks",
   },
   {
-    heading: "Lightning Protection",
-    content: "Installations requiring engineered protection and safety compliance.",
-    svg: "shield", 
+    heading: "Automotive",
+    content: "Engine components, piston rings, and shifters.",
+    svg: "shield",
   },
 ];
 ---
 
-<MainLayout
-  title={pageTitle}
-  customDescription={metaDescription}
->
+<MainLayout title={pageTitle} customDescription={metaDescription}>
   <!-- Hero Section -->
   <MainSection
-    title="Manufacturing Grounding & Electrical Protection Solutions"
-    subTitle="MFOLKS Geotrix is a manufacturer of earthing, lightning protection, and electrical grounding components designed for infrastructure and industrial applications. Our focus is on delivering dependable products that meet installation requirements, safety expectations, and long-term field performance. Rather than operating as a trading catalogue, we work as a production-driven organization where engineering discipline, material control, and inspection practices form the foundation of every product we supply."
+    title="About MFOLKS Industries"
+    subTitle={aboutContent.description}
   />
 
   <!-- Detailed Sections -->
@@ -136,45 +131,67 @@ const supportFeatures = [
 
   <!-- Engineering & Improvement Text Grid -->
   <div class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
-      <div class="grid md:grid-cols-2 gap-12">
-        <div>
-            <h3 class="text-2xl font-bold text-neutral-800 dark:text-neutral-200 mb-4">Engineering-Focused Approach</h3>
-            <p class="text-neutral-600 dark:text-neutral-400 mb-6">
-                Grounding and lightning protection components are critical to electrical safety and system reliability. Our focus remains on producing components that integrate properly within engineered installations. We emphasize practical installation compatibility, material integrity, process consistency, and inspection discipline. This approach supports long-term system performance rather than short-term claims.
-            </p>
-        </div>
-        <div>
-            <h3 class="text-2xl font-bold text-neutral-800 dark:text-neutral-200 mb-4">Commitment to Continuous Improvement</h3>
-            <p class="text-neutral-600 dark:text-neutral-400 mb-6">
-                Manufacturing processes evolve with field feedback, inspection findings, and operational review. Continuous refinement helps improve repeatability, reduce variability, and strengthen production discipline. Quality is treated as an ongoing system — not a static promise.
-            </p>
-        </div>
+    <div class="grid md:grid-cols-2 gap-12">
+      <div>
+        <h3
+          class="text-2xl font-bold text-neutral-800 dark:text-neutral-200 mb-4"
+        >
+          Engineering-Focused Approach
+        </h3>
+        <p class="text-neutral-600 dark:text-neutral-400 mb-6">
+          Every wire is crafted with a focus on precision, quality, and
+          consistency. We know that downtime is costly in effective industries,
+          so our wires are engineered for trust—smoother coatings, better
+          adhesion, and reduced maintenance.
+        </p>
       </div>
+      <div>
+        <h3
+          class="text-2xl font-bold text-neutral-800 dark:text-neutral-200 mb-4"
+        >
+          Commitment to Success
+        </h3>
+        <p class="text-neutral-600 dark:text-neutral-400 mb-6">
+          As the demand for advanced surface technologies grows, we are here to
+          support you with dependable products, technical clarity, and a
+          commitment to helping you succeed.
+        </p>
+      </div>
+    </div>
   </div>
 
   <!-- Supporting Projects Features -->
   <FeaturesGeneral
-    title="Supporting Infrastructure & Industrial Projects"
-    subTitle="MFOLKS Geotrix products are intended for demanding applications. Our role is to supply dependable components that support engineered protection systems."
+    title="Supporting Key Industries"
+    subTitle="MFOLKS products are intended for demanding applications in Power, Marine, Oil & Gas, Automotive, and Heavy Engineering."
     features={supportFeatures}
   />
 
   <!-- Technical Enquiries CTA -->
-  <div class="bg-neutral-50 dark:bg-neutral-900 border-y border-neutral-200 dark:border-neutral-700">
-      <div class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 text-center">
-          <h2 class="text-3xl font-bold text-neutral-800 dark:text-neutral-200 mb-4">Technical Enquiries & Project Support</h2>
-          <p class="text-neutral-600 dark:text-neutral-400 mb-8 max-w-2xl mx-auto">
-              For project-specific requirements, documentation requests, or technical clarification.
-          </p>
-          <div class="flex flex-wrap justify-center gap-4">
-             <a href="/contact" class="inline-flex justify-center items-center gap-x-3 text-center bg-orange-500 hover:bg-orange-600 border border-transparent text-white text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-white transition py-3 px-4 dark:focus:ring-offset-gray-800">
-                Contact Our Technical Team
-             </a>
-             <a href="/products" class="inline-flex justify-center items-center gap-x-3 text-center bg-white hover:bg-gray-50 border border-gray-200 text-gray-800 text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-white transition py-3 px-4 dark:bg-neutral-800 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-700">
-                Request Product Information
-             </a>
-          </div>
+  <div
+    class="bg-neutral-50 dark:bg-neutral-900 border-y border-neutral-200 dark:border-neutral-700"
+  >
+    <div
+      class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 text-center"
+    >
+      <h2
+        class="text-3xl font-bold text-neutral-800 dark:text-neutral-200 mb-4"
+      >
+        Technical Enquiries & Project Support
+      </h2>
+      <p class="text-neutral-600 dark:text-neutral-400 mb-8 max-w-2xl mx-auto">
+        For project-specific requirements, documentation requests, or technical
+        clarification.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a
+          href="/contact"
+          class="inline-flex justify-center items-center gap-x-3 text-center bg-blue-500 hover:bg-blue-600 border border-transparent text-white text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-white transition py-3 px-4 dark:focus:ring-offset-gray-800"
+        >
+          Contact Our Technical Team
+        </a>
       </div>
+    </div>
   </div>
-
 </MainLayout>
+

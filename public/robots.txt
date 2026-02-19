@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.mfolksgeotrix.com/sitemap-index.xml
+Sitemap: https://www.mfolksthermox.com/sitemap-index.xml

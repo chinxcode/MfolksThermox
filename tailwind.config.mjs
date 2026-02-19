@@ -8,10 +8,10 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#50c1c8',
-        'primary-dark': '#3a8e94',
+        primary: '#3b82f6',
+        'primary-dark': '#1d4ed8',
         secondary: '#2d3748',
-        accent: '#f6ad55',
+        accent: '#60a5fa',
       },
       fontFamily: {
         display: ['Outfit', 'sans-serif'],

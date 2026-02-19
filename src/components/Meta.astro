@@ -1,5 +1,4 @@
 ---
-import { getImage } from "astro:assets";
 import { OG, SEO, SITE } from "@data/constants";
 
 // Default properties for the Meta component. These values are used if props are not provided.
@@ -23,6 +22,8 @@ const {
   socialImage: customSocialImage = null,
 } = Astro.props;
 
+import logo from "@/assets/images/logo.png";
+
 // Use custom description if provided, otherwise use default meta
 const description = customDescription || meta;
 // Use custom OG title if provided, otherwise use default OG title
@@ -32,20 +33,16 @@ const ogDescription = customDescription || OG.description;
 // Define the metadata for your website and individual pages
 const siteURL = `${Astro.site}`; // Set the website URL in astro.config.mjs
 const author = SITE.author;
-const canonical = new URL(
-  Astro.url.pathname,
-  Astro.site || Astro.url.origin
-).href;
+const canonical = new URL(Astro.url.pathname, Astro.site || Astro.url.origin)
+  .href;
 const basePath = Astro.url.pathname;
+const favicon = logo.src;
 
-let socialImage = customSocialImage;
-if (!socialImage) {
-  const socialImageRes = await getImage({
-    src: OG.image,
-    width: 1200,
-    height: 600,
-  });
-  socialImage = Astro.url.origin + socialImageRes.src;
+let socialImage = customSocialImage || logo.src;
+
+// Ensure socialImage is absolute if it's a relative path
+if (socialImage && !socialImage.startsWith("http")) {
+  socialImage = new URL(socialImage, Astro.site || Astro.url.origin).href;
 }
 
 const languages: { [key: string]: string } = {
@@ -74,11 +71,12 @@ const alternateLanguageLinks: string = Object.entries(languages)
     return `<link rel="alternate" hreflang="${lang}" href="${href}" />`;
   })
   .join("\n");
-
 ---
 
-{/*  Inject structured data into the page if provided. This data is formatted as JSON-LD, a method recommended by Google for structured data pass:
-     https://developers.google.com/search/docs/advanced/structured-data/intro-structured-data */}{
+{
+  /*  Inject structured data into the page if provided. This data is formatted as JSON-LD, a method recommended by Google for structured data pass:
+     https://developers.google.com/search/docs/advanced/structured-data/intro-structured-data */
+}{
   structuredData && (
     <script
       type="application/ld+json"
@@ -120,7 +118,7 @@ const alternateLanguageLinks: string = Object.entries(languages)
 
 {/* Links to the webmanifest and sitemap */}
 {/* https://docs.astro.build/en/guides/integrations-guide/sitemap/ */}
-<link rel="icon" href="/siteicon.ico" sizes="any" />
+<link rel="icon" href={favicon} sizes="any" />
 <link rel="sitemap" href="/sitemap-index.xml" />
 
 {/* Set theme color */}

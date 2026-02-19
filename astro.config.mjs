@@ -7,7 +7,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://www.mfolksgeotrix.com',
+  site: 'https://www.mfolksthermox.com',
   integrations: [
     tailwind({ applyBaseStyles: false }),
     react(),
@@ -32,7 +32,6 @@ export default defineConfig({
         '@styles': fileURLToPath(new URL('./src/assets/styles', import.meta.url)),
         '@scripts': fileURLToPath(new URL('./src/assets/scripts', import.meta.url)),
         '@utils': fileURLToPath(new URL('./src/utils', import.meta.url)),
-        '@images': fileURLToPath(new URL('./src/images', import.meta.url)),
       }
     }
   }

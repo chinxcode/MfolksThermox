@@ -5,17 +5,14 @@ import MainSection from "@components/ui/blocks/MainSection.astro";
 import LeftSection from "@components/ui/blocks/LeftSection.astro";
 import RightSection from "@components/ui/blocks/RightSection.astro";
 import FeaturesStats from "@components/sections/features/FeaturesStats.astro";
-
-// Import necessary images
-import blueprints from "@images/blueprints-image.avif";
-import personWorking from "@images/person-working.avif";
-import beforeAfter from "@images/before-after.avif";
-import constructionWorkers from "@images/construction-workers.avif";
-import aerialView from "@images/aerial-view.avif";
-import usingTools from "@images/using-tools.avif";
-import progressBuilding from "@images/progress-building.avif";
-import underConstruction from "@images/under-construction.avif";
 import { SITE } from "@data/constants";
+
+import globalLogistics from "@/assets/images/services/global-logistics.webp";
+import warehouseInventory from "@/assets/images/services/warehouse-inventory.webp";
+import manufacturingPlant from "@/assets/images/services/manufacturing-plant.webp";
+import globalEquipmentSales from "@/assets/images/services/global-equipment-sales.webp";
+import spareParts from "@/assets/images/services/spare-parts.webp";
+import technicalConsultation from "@/assets/images/services/technical-consultation.webp";
 
 interface Article {
   isRightSection: boolean;
@@ -36,65 +33,51 @@ interface Article {
 const articles: Article[] = [
   {
     isRightSection: true,
-    title: "Expert Site Consultation",
+    title: "Global Material Supply",
     subTitle:
-      "Choosing the right protection system begins with understanding your environment. Our experts provide detailed site surveys and soil resistivity tests to ensure your earthing system is perfectly matched to your local conditions, ensuring safety and compliance from day one.",
+      "We ensure timely delivery of high-quality thermal spray wires and powders to your facility, wherever you are. Our robust logistics network handles domestic and international shipments with efficiency, ensuring your production lines never stop.",
     single: false,
-    imgOne: blueprints,
-    imgOneAlt: "Technical staff reviewing blueprints for earthing systems.",
-    imgTwo: personWorking,
-    imgTwoAlt: "Technical analysis of soil resistivity data.",
+    imgOne: globalLogistics,
+    imgOneAlt: "Global shipping and logistics container.",
+    imgTwo: warehouseInventory,
+    imgTwoAlt: "Warehouse stocked with thermal spray materials.",
   },
   {
     isRightSection: false,
-    title: "Precision Earthing Installation",
+    title: "Custom Alloy Manufacturing",
     subTitle:
-      "Our installation teams are trained to the highest standards, ensuring every technical detail—from chemical electrode placement to backfill compound application—is performed with precision. We bring MFOLKS quality to your site, ensuring systems that last for decades.",
-    img: beforeAfter,
-    imgAlt: "Progress from excavation to completed earthing pit.",
+      "Need a specific chemical composition? As a manufacturer, we can develop and produce custom alloy wires and powders tailored to your specific application requirements and industry standards. We work closely with you to meet precise metallurgical specifications.",
+    img: manufacturingPlant,
+    imgAlt: "Manufacturing of custom thermal spray wires.",
     btnExists: true,
-    btnTitle: "View Installation Steps",
-    btnURL: "/quality",
+    btnTitle: "Contact for Custom Alloys",
+    btnURL: "/contact",
   },
   {
     isRightSection: true,
-    title: "Technical Design & Solutions",
+    title: "Equipment Sales & Support",
     subTitle:
-      "Every facility has unique vulnerabilities. We provide customized design services for lightning protection systems, ensuring path optimization and maximum coverage using ESE or conventional terminals based on your risk profile.",
+      "We supply state-of-the-art thermal spray guns and systems. While we do not perform the coating ourselves, we ensure you have the best machinery to do the job. We also provide a comprehensive range of spare parts to keep your equipment operational.",
     single: false,
-    imgOne: constructionWorkers,
-    imgOneAlt: "Technical team drafting lightning protection layouts.",
-    imgTwo: aerialView,
-    imgTwoAlt: "Aerial overview of a protected industrial facility.",
+    imgOne: globalEquipmentSales,
+    imgOneAlt: "Display of thermal spray guns and equipment.",
+    imgTwo: spareParts,
+    imgTwoAlt: "Spare parts inventory for spray guns.",
   },
   {
     isRightSection: false,
-    title: "Maintenance & System Audits",
+    title: "Technical Material Consultation",
     subTitle:
-      "Grounding systems are 'hidden' assets. We provide regular maintenance, integrity testing, and certification audits to ensure your protection remains reliable even years after installation, protecting your people and expensive infrastructure.",
-    img: usingTools,
-    imgAlt: "Technician performing continuity test on an earthing grid.",
-  },
-  {
-    isRightSection: true,
-    title: "Industrial & Solar Turnkey Solutions",
-    subTitle:
-      "For large-scale arrays and factories, we offer full turnkey protection packages. From material supply to final commissioning and documentation, MFOLKS Geotrix is your single-point partner for industrial electrical safety.",
-    single: false,
-    imgOne: progressBuilding,
-    imgOneAlt: "Turnkey installation at a solar power plant.",
-    imgTwo: underConstruction,
-    imgTwoAlt: "Integrated grounding grid at a new industrial construction.",
-    btnExists: true,
-    btnTitle: "Request a Consultation",
-    btnURL: "/contact-us",
+      "Our expertise lies in metallurgy. Our engineering team assists you in selecting the optimal wire or powder for your specific wear or corrosion challenge, ensuring you get the maximum performance from the materials we supply.",
+    img: technicalConsultation,
+    imgAlt: "Engineers discussing material specifications.",
   },
 ];
 
-const pageTitle: string = `Services | ${SITE.title}`;
+const pageTitle: string = `Supply Solutions | ${SITE.title}`;
 const metaDescription =
-  "MFOLKS Geotrix provides end-to-end electrical safety services including site surveys, technical design, precision installation, and maintenance for earthing and lightning protection.";
-const ogTitle = "Protection Services & Solutions | MFOLKS Geotrix";
+  "MFOLKS Thermox is a dedicated manufacturer of thermal spray materials. We focus solely on supplying high-quality wires, powders, and equipment for your coating needs.";
+const ogTitle = "Thermal Spray Supply Solutions | MFOLKS Thermox";
 ---
 
 <MainLayout
@@ -106,7 +89,7 @@ const ogTitle = "Protection Services & Solutions | MFOLKS Geotrix";
     "@type": "WebPage",
     "@id": `${SITE.url}/services`,
     url: `${SITE.url}/services`,
-    name: "Earthing & Lightning Protection Services | MFOLKS Geotrix",
+    name: "Material Supply Solutions | MFOLKS Thermox",
     description: metaDescription,
     isPartOf: {
       "@type": "WebSite",
@@ -117,11 +100,11 @@ const ogTitle = "Protection Services & Solutions | MFOLKS Geotrix";
   }}
 >
   <MainSection
-    title="Safety Built Into Every Detail"
-    subTitle="MFOLKS Geotrix goes beyond manufacturing. We provide the expertise needed to design, install, and maintain systems that stand up to the most demanding industrial environments. Your safety is our benchmark."
+    title="Dedicated to Material Excellence"
+    subTitle="We specialize in the manufacturing and supply of premium thermal spray wires, powders, and equipment. We empower your operations with the best materials in the industry."
     btnExists={true}
-    btnTitle="Schedule a Site Survey"
-    btnURL="/contact-us"
+    btnTitle="Request Material Quote"
+    btnURL="/contact"
   />
 
   {
@@ -155,13 +138,13 @@ const ogTitle = "Protection Services & Solutions | MFOLKS Geotrix";
 
   <FeaturesStats
     title="Proven Performance"
-    subTitle="Our commitment to excellence is proven by the numbers. From small commercial builds to massive solar farms, MFOLKS Geotrix systems provide the reliability you can trust."
+    subTitle="Our commitment to excellence is proven by the numbers. From small commercial jobs to massive industrial projects, MFOLKS Thermox services provide the reliability you can trust."
     mainStatTitle="500+"
-    mainStatSubTitle="successful large-scale industrial & solar installations"
+    mainStatSubTitle="successful coating projects delivered"
     stats={[
       {
         stat: "100%",
-        description: "compliance with IS/IEC standards",
+        description: "compliance with ISO standards",
       },
       {
         stat: "25+",
@@ -169,7 +152,7 @@ const ogTitle = "Protection Services & Solutions | MFOLKS Geotrix";
       },
       {
         stat: "0",
-        description: "system failures reported",
+        description: "coating failures reported",
       },
     ]}
   />

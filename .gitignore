@@ -20,6 +20,7 @@ yarn-error.log*
 .env.test.local
 .env.production.local
 *.env.local
+.env.example
 
 # OS Metadata
 .DS_Store

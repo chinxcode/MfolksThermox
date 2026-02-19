@@ -1,14 +1,11 @@
-import ogImageSrc from "@images/social.png";
-
-
 
 export const SITE = {
-  title: "MFOLKS Geotrix",
+  title: "MFOLKS Thermox",
   tagline: "Manufacturer of Earthing & Lightning Protection Solutions",
-  description: "MFOLKS Geotrix is a leading manufacturer of high-performance earthing and lightning protection systems for solar plants, industries, and infrastructure projects across India.",
+  description: "MFOLKS Thermox is a leading manufacturer of high-performance earthing and lightning protection systems for solar plants, industries, and infrastructure projects across India.",
   description_short: "Leading manufacturer of high-performance earthing and lightning protection systems.",
-  url: "https://www.mfolksgeotrix.com",
-  author: "MFOLKS Geotrix",
+  url: "https://www.mfolksthermox.com",
+  author: "MFOLKS Thermox",
 };
 
 export const SEO = {
@@ -36,8 +33,8 @@ export const OG = {
   type: "website",
   url: SITE.url,
   title: `${SITE.title} - ${SITE.tagline}`,
-  description: "Protect your infrastructure with MFOLKS Geotrix's top-quality earthing and lightning protection solutions. Trusted by industry leaders in solar, data centers, and infrastructure. Experience the difference of in-house manufacturing and custom technical solutions.",
-  image: ogImageSrc,
+  description: "Protect your infrastructure with MFOLKS Thermox's top-quality earthing and lightning protection solutions. Trusted by industry leaders in solar, data centers, and infrastructure. Experience the difference of in-house manufacturing and custom technical solutions.",
+  image: "https://placehold.co/1200x600?text=MFOLKS+Thermox",
 };
 
 export const partnersData = [

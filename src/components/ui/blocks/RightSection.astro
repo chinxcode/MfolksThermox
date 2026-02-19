@@ -59,6 +59,7 @@ interface Props {
           src={imgOne}
           alt={imgOneAlt}
           format={"avif"}
+          inferSize={true}
         />
       </div>
     ) : (
@@ -70,6 +71,7 @@ interface Props {
           alt={imgOneAlt}
           draggable={"false"}
           format={"avif"}
+          inferSize={true}
         />
         <!-- Second image in a two-image layout -->
         <Image
@@ -78,6 +80,7 @@ interface Props {
           alt={imgTwoAlt}
           draggable={"false"}
           format={"avif"}
+          inferSize={true}
         />
       </div>
     )

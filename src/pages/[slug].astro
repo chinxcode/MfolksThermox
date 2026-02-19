@@ -1,13 +1,14 @@
 ---
 // Import components
 import MainLayout from "@layouts/MainLayout.astro";
-import ProductTabBtn from "@components/ui/buttons/ProductTabBtn.astro";
-import PrimaryCTA from "@components/ui/buttons/PrimaryCTA.astro";
-import { Image } from "astro:assets";
-import { wpFetch, ALL_PRODUCTS_QUERY, PRODUCT_BY_SLUG_QUERY } from "@lib/wp";
-import { SITE } from "@data/constants";
 import ProductDetailClient from "@components/products/ProductDetailClient";
 import ProductCarousel from "@components/products/ProductCarousel.astro";
+import { SITE } from "@data/constants";
+import {
+  fetchGraphQL,
+  GET_ALL_PRODUCT_SLUGS,
+  GET_PRODUCT_BY_SLUG,
+} from "@lib/graphql";
 
 // Global declaration for gsap
 declare global {
@@ -16,74 +17,47 @@ declare global {
   }
 }
 
-// Get static paths from WordPress
+// Get static paths from GraphQL
 export async function getStaticPaths() {
-  const data = await wpFetch(ALL_PRODUCTS_QUERY);
-  const products = data?.products?.nodes || [];
+  try {
+    const data = await fetchGraphQL(GET_ALL_PRODUCT_SLUGS);
+    const slugs = data?.products?.nodes || [];
 
-  return products.map((product: any) => ({
-    params: { slug: product.slug },
-    props: { productSlug: product.slug },
-  }));
+    // Fetch details for each product to generate pages
+    const paths = await Promise.all(
+      slugs.map(async (node: any) => {
+        const productData = await fetchGraphQL(GET_PRODUCT_BY_SLUG, {
+          slug: node.slug,
+        });
+        return {
+          params: { slug: node.slug },
+          props: {
+            product: productData?.product,
+          },
+        };
+      }),
+    );
+
+    return paths;
+  } catch (error) {
+    console.error("Error fetching GraphQL paths:", error);
+    return [];
+  }
 }
 
-const { productSlug } = Astro.props;
-
-// Fetch full product data
-const data = await wpFetch(PRODUCT_BY_SLUG_QUERY, { slug: productSlug });
-const product = data?.product;
+const { product } = Astro.props;
 
 if (!product) {
   return Astro.redirect("/404");
 }
 
-// Dynamic SEO using Rank Math / Yoast template format
+// SEO
 const pageTitle = `${product.title} Supplier in India | ${SITE.title}`;
-const metaDescription = `Manufacturer and supplier of ${product.title} in India. Pan-India delivery for industrial, solar, data center, and infrastructure projects.`;
-const ogTitle = `${product.title} Supplier in India | MFOLKS Geotrix`;
+const metaDescription = `Manufacturer and supplier of ${product.title}. Premium quality thermal spray solutions for industrial applications.`;
+const ogTitle = `${product.title} - MFOLKS Thermal Spray Solutions`;
 
-// Define tabs for product detail page
-const tabs = [
-  {
-    title: "Overview",
-    id: "tabs-with-card-item-1",
-    dataTab: "#tabs-with-card-1",
-  },
-  {
-    title: "Specifications",
-    id: "tabs-with-card-item-2",
-    dataTab: "#tabs-with-card-2",
-  },
-  {
-    title: "Variants & Pricing",
-    id: "tabs-with-card-item-3",
-    dataTab: "#tabs-with-card-3",
-  },
-];
-
-// ========================================
-// 🚀 DYNAMIC SCHEMA GENERATION FOR GOOGLE
-// ========================================
-// Extract variant prices and calculate price range
-const variants = product.productData?.productVariants || [];
-const prices = variants
-  .map((v: any) => (v.variantPrice ? parseFloat(String(v.variantPrice)) : null))
-  .filter((p: number | null) => p !== null && !isNaN(p) && p > 0) as number[];
-
-// Determine availability based on variants
-// Handle both array format from WordPress and string format from mock data
-const hasInStockVariants = variants.some((v: any) => {
-  const availability = Array.isArray(v.availability)
-    ? v.availability[0]
-    : v.availability;
-  return availability === "in_stock" || availability === "standard";
-});
-const availabilityStatus = hasInStockVariants
-  ? "https://schema.org/InStock"
-  : "https://schema.org/PreOrder";
-
-// Build structured data with proper offers
-let structuredData: any = {
+// Schema
+const structuredData = {
   "@context": "https://schema.org",
   "@type": "Product",
   "@id": `${SITE.url}/${product.slug}`,
@@ -91,49 +65,18 @@ let structuredData: any = {
   description: metaDescription,
   brand: {
     "@type": "Brand",
-    name: "MFOLKS Geotrix",
+    name: "MFOLKS",
   },
   url: `${SITE.url}/${product.slug}`,
-};
-
-// Add image if available
-if (product.featuredImage?.node?.sourceUrl) {
-  structuredData.image = product.featuredImage.node.sourceUrl;
-}
-
-// Add SKU from first variant if available
-if (variants.length > 0 && variants[0].variantSku) {
-  structuredData.sku = variants[0].variantSku;
-}
-
-// ✅ ADD OFFERS (Required by Google)
-if (prices.length > 0) {
-  const lowPrice = Math.min(...prices);
-  const highPrice = Math.max(...prices);
-
-  structuredData.offers = {
-    "@type": "AggregateOffer",
-    priceCurrency: "INR",
-    lowPrice: String(lowPrice),
-    highPrice: String(highPrice),
-    offerCount: String(variants.length),
-    availability: availabilityStatus,
-    url: `${SITE.url}/${product.slug}`,
-  };
-} else {
-  //  Fallback for products without pricing (configurable/POA)
-  // Use simple Offer to satisfy Google's requirement
-  structuredData.offers = {
+  image: product.featuredImage.node.sourceUrl,
+  offers: {
     "@type": "Offer",
     priceCurrency: "INR",
-    price: "0",
-    availability: availabilityStatus,
+    price: "0", // Call for price
+    availability: "https://schema.org/InStock",
     url: `${SITE.url}/${product.slug}`,
-    priceValidUntil: new Date(new Date().getFullYear() + 1, 11, 31)
-      .toISOString()
-      .split("T")[0],
-  };
-}
+  },
+};
 ---
 
 <MainLayout
@@ -205,11 +148,9 @@ if (prices.length > 0) {
                     stroke="currentColor"
                     stroke-width="1"
                   >
-                    <>
-                      <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
-                      <circle cx="9" cy="9" r="2" />
-                      <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
-                    </>
+                    <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
+                    <circle cx="9" cy="9" r="2" />
+                    <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
                   </svg>
                 </div>
               )
@@ -402,6 +343,9 @@ if (prices.length > 0) {
         <div
           class="bg-white dark:bg-neutral-900 rounded-2xl shadow-xl shadow-neutral-200/50 dark:shadow-neutral-900/50 border border-neutral-200 dark:border-neutral-700 p-1 md:p-2 overflow-hidden sticky-pricing-card"
         >
+          {
+            /* Note: ProductDetailClient might need adaptation or might work if it just renders title/buttons */
+          }
           <ProductDetailClient client:load product={product} />
         </div>
 
@@ -426,33 +370,10 @@ if (prices.length > 0) {
     </div>
   </div>
 
-  {/* Related Products Sections */}
+  {/* Simplified Related Products Logic */}
   {
-    (product.productData?.relatedSystems?.nodes?.length > 0 ||
-      product.productData?.compatibleProducts?.nodes?.length > 0 ||
-      product.productData?.recommendedProducts?.nodes?.length > 0) && (
+    product.productData?.recommendedProducts?.nodes?.length > 0 && (
       <div class="mx-auto max-w-[85rem] px-4 pb-10 sm:px-6 lg:px-8 lg:pb-14 space-y-12">
-        {/* Related Systems */}
-        <ProductCarousel
-          products={product.productData?.relatedSystems?.nodes}
-          variant="orange"
-          title="Related Systems"
-          icon='<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />'
-          badge="System"
-          ctaText="View System"
-        />
-
-        {/* Compatible Products */}
-        <ProductCarousel
-          products={product.productData?.compatibleProducts?.nodes}
-          variant="blue"
-          title="Compatible Products"
-          icon='<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />'
-          badge="Compatible"
-          ctaText="View Details"
-        />
-
-        {/* Recommended Products */}
         <ProductCarousel
           products={product.productData?.recommendedProducts?.nodes}
           variant="green"
