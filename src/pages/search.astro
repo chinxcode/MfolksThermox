@@ -1,0 +1,45 @@
+---
+import MainLayout from "@/layouts/MainLayout.astro";
+import ProductSearch from "@components/products/ProductSearch.tsx";
+import { SITE } from "@data/constants";
+
+const pageTitle = `Search Products | ${SITE.title}`;
+---
+
+<MainLayout
+    title={pageTitle}
+    structuredData={{
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "@id": "https://mfolksthermox.com/search",
+        url: "https://mfolksthermox.com/search",
+        name: "Search Thermal Spray Products",
+        description:
+            "Search our catalog of thermal spray wires, powders, and equipment.",
+        isPartOf: {
+            "@type": "WebSite",
+            url: "https://mfolksthermox.com",
+            name: "MFOLKS Thermox",
+            description: "Check out our thermal spray solutions.",
+        },
+        inLanguage: "en-US",
+    }}
+>
+    <div
+        class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full"
+    >
+        <div class="mb-10 max-w-2xl text-center mx-auto">
+            <h1
+                class="text-4xl font-bold tracking-tight text-neutral-800 dark:text-neutral-200 sm:text-5xl mb-4"
+            >
+                Find Your Solution
+            </h1>
+            <p class="text-lg text-neutral-600 dark:text-neutral-400">
+                Search our comprehensive range of thermal spray materials and
+                equipment.
+            </p>
+        </div>
+
+        <ProductSearch client:load />
+    </div>
+</MainLayout>

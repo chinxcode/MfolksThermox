@@ -5,14 +5,13 @@ import MainSection from "@components/ui/blocks/MainSection.astro";
 import LeftSection from "@components/ui/blocks/LeftSection.astro";
 import RightSection from "@components/ui/blocks/RightSection.astro";
 import FeaturesStats from "@components/sections/features/FeaturesStats.astro";
-
-// Import images
-import solarPlant from "@images/construction-image.avif";
-import industrialMeters from "@images/automated-tools.avif";
-import highRise from "@images/progress-building.avif";
-import infrastructure from "@images/aerial-view.avif";
-import dataCenter from "@images/dashboard-image.avif";
 import { SITE } from "@data/constants";
+
+import bridgeCorrosion from "@/assets/images/applications/bridge-corrosion.webp";
+import hardFacing from "@/assets/images/applications/hard-facing-applications.webp";
+import shaftRestoration from "@/assets/images/applications/shaft-restoration.webp";
+import copperSpray from "@/assets/images/applications/copper-spray-coating.webp";
+import thermalBarrier from "@/assets/images/applications/thermal-barrier-coating.webp";
 
 interface Article {
   isRightSection: boolean;
@@ -33,59 +32,59 @@ interface Article {
 const articles: Article[] = [
   {
     isRightSection: true,
-    title: "Solar Power Plants & Renewable Energy",
+    title: "Anti-Corrosion Solutions",
     subTitle:
-      "Utility-scale solar farms require robust DC-side earthing to prevent inverter burnout and fire hazards. We specialize in designing interconnected grounding grids for large acreage sites. \n\nProducts: Copper Bonded Rods, Flat Strips, ESE Lightning Arrestors. \nCompliance: Meets IEC 60364-7-712 and IS 3043 standards for PV safety.",
+      "Zinc and Aluminium thermal spray coatings provide long-term corrosion protection for bridges, wind towers, and offshore structures. Acting as a sacrificial anode, these coatings offer 25+ years of maintenance-free service life even in marine environments.",
     single: true,
-    imgOne: solarPlant,
-    imgOneAlt: "Solar farm grounding grid and lightning protection.",
+    imgOne: bridgeCorrosion,
+    imgOneAlt: "Thermal spray zinc coating on bridge infrastructure.",
   },
   {
     isRightSection: false,
-    title: "Industrial Plants & Manufacturing",
+    title: "Wear Resistance & Hard Facing",
     subTitle:
-      "Heavy machinery and VFDs generate significant electrical noise and fault currents. Our maintenance-free chemical earthing systems ensure low resistance (<1 Ohm) even in corrosive industrial soils, protecting PLC automation and ensuring worker safety during fault conditions. \n\nProducts: Chemical Earthing Electrodes, Earth Enhancement Compounds (BFC).",
-    img: industrialMeters,
-    imgAlt: "Industrial earthing for heavy machinery and automation.",
+      "Tungsten Carbide and Chromium Carbide coatings protect critical components from abrasion, erosion, and fretting. Essential for oil & gas valves, pump shafts, and mining equipment, extending service life by up to 500%.",
+    img: hardFacing,
+    imgAlt: "HVOF coating application for wear resistance.",
     btnExists: true,
-    btnTitle: "View Industrial Products",
-    btnURL: "/products",
+    btnTitle: "View Wear Resistant Powders",
+    btnURL: "/thermal-spray-powders",
   },
   {
     isRightSection: true,
-    title: "Infrastructure & Railways",
+    title: "Dimensional Restoration",
     subTitle:
-      "From metro rail signaling to highway lighting, public infrastructure demands durability. Our heavy-duty copper bonded rods are designed to withstand high mechanical stress and resist corrosion for 50+ years, ensuring uninterruptible service for critical transport networks. \n\nUse Case: Trackside signaling grounding, OHE mast protection.",
+      "Restore undersized or mis-machined parts to their original dimensions. Shafts, rollers, and bearing seats can be built up with stainless steel or nickel alloys without heat distortion, saving the cost of manufacturing new components.",
     single: true,
-    imgOne: infrastructure,
-    imgOneAlt: "Railway signaling and OHE mast earthing connection.",
+    imgOne: shaftRestoration,
+    imgOneAlt: "Dimensional restoration of a worn industrial shaft.",
   },
   {
     isRightSection: false,
-    title: "Data Centers & IT Parks",
+    title: "Electrical Conductivity",
     subTitle:
-      "Mission-critical servers cannot afford downtime or data corruption caused by EMI/RFI interference. We design high-density Signal Reference Grids (SRG) and clean earth systems that provide an equipotential plane for sensitive electronics. \n\nSafety: Zero-noise grounding preventing voltage fluctuation damage.",
-    img: dataCenter,
-    imgAlt: "Clean earth system for data center server racks.",
+      "Copper and Aluminium coatings provide excellent electrical conductivity on composite or ceramic substrates. Used in lightning protection, EMI shielding, and grounding connections for diverse industrial applications.",
+    img: copperSpray,
+    imgAlt: "Copper thermal spray for electrical conductivity.",
   },
   {
     isRightSection: true,
-    title: "Commercial & High-Rise Buildings",
+    title: "Thermal Barrier Coatings",
     subTitle:
-      "Modern architectural esthetics shouldn't compromise safety. Our Advance Early Streamer Emission (ESE) Lightning Arrestors offer a large radius of protection (up to 107m) with a single aesthetically integrated terminal, replacing unsightly mesh cages. \n\nCompliance: NBC 2016 and IEC 62305 protection levels.",
+      "Ceramic oxide coatings insulate components from extreme heat, improving efficiency in gas turbines and engine components. These coatings reduce thermal fatigue and allow higher operating temperatures.",
     single: true,
-    imgOne: highRise,
-    imgOneAlt: "ESE Lightning protection for high-rise commercial tower.",
+    imgOne: thermalBarrier,
+    imgOneAlt: "Ceramic thermal barrier coating on turbine blade.",
     btnExists: true,
-    btnTitle: "Get Building Compliance Check",
-    btnURL: "/contact-us",
+    btnTitle: "Consult on TBCs",
+    btnURL: "/contact",
   },
 ];
 
 const pageTitle: string = `Applications | ${SITE.title}`;
 const metaDescription =
-  "MFOLKS Geotrix provides specialized earthing and lightning protection for solar plants, industrial facilities, high-rise buildings, and mission-critical infrastructure.";
-const ogTitle = "Industry Applications | MFOLKS Geotrix";
+  "MFOLKS Thermox delivers specialized thermal spray solutions for Anti-Corrosion, Wear Resistance, and Surface Restoration across Oil & Gas, Power, and Infrastructure sectors.";
+const ogTitle = "Industry Applications | MFOLKS Thermox";
 ---
 
 <MainLayout
@@ -97,7 +96,7 @@ const ogTitle = "Industry Applications | MFOLKS Geotrix";
     "@type": "WebPage",
     "@id": `${SITE.url}/applications`,
     url: `${SITE.url}/applications`,
-    name: "Earthing Applications by Industry | MFOLKS Geotrix",
+    name: "Thermal Spray Applications by Industry | MFOLKS Thermox",
     description: metaDescription,
     isPartOf: {
       "@type": "WebSite",
@@ -108,11 +107,11 @@ const ogTitle = "Industry Applications | MFOLKS Geotrix";
   }}
 >
   <MainSection
-    title="Industry-Specific Earthing & Lightning Protection"
-    subTitle="Critical infrastructure demands sector-specific safety solutions. From the high-voltage risks of solar farms to the sensitive electronics of data centers, MFOLKS Geotrix delivers compliant systems tailored to your industries unique electrical and environmental challenges."
+    title="Surface Engineering for Critical Industries"
+    subTitle="From offshore platforms battling corrosion to mining equipment facing extreme abrasion, MFOLKS Thermox provides tailored surface solutions. We extend component life and improve performance where it matters most."
     btnExists={true}
-    btnTitle="Consult Our Experts"
-    btnURL="/contact-us"
+    btnTitle="Discuss Your Application"
+    btnURL="/contact"
   />
 
   {
@@ -145,22 +144,22 @@ const ogTitle = "Industry Applications | MFOLKS Geotrix";
   }
 
   <FeaturesStats
-    title="Sector-Wide Expertise"
-    subTitle="Trusted by India's leading EPCs and government bodies for projects where failure is not an option."
-    mainStatTitle="1000+"
-    mainStatSubTitle="site surveys and soil resistivity tests conducted globally"
+    title="Proven across Sectors"
+    subTitle="Trusted by leading OEMs and maintenance teams for reliability and coating excellence."
+    mainStatTitle="100+"
+    mainStatSubTitle="Unique applications engineered"
     stats={[
       {
-        stat: "100%",
-        description: "Approval rate by PWD/CPWD",
+        stat: "ISO",
+        description: "Standard compliant coatings",
       },
       {
-        stat: "IS 3043",
-        description: "Fully compliant system designs",
+        stat: "HVOF",
+        description: "High Velocity Technology",
       },
       {
-        stat: "25k+",
-        description: "Units manufactured monthly",
+        stat: "30+",
+        description: "Years of expertise",
       },
     ]}
   />

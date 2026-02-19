@@ -14,7 +14,7 @@ interface Tab {
   svg: string;
   src: any;
   alt: string;
-  first?: boolean;
+
 }
 
 interface Props {
@@ -41,6 +41,7 @@ interface Props {
             src={tab.src} 
             alt={tab.alt} 
             class="h-full w-full object-cover brightness-[0.9] dark:brightness-[0.2] transition-all duration-700"
+            inferSize={true}
           />
           <!-- Adaptive Gradient Overlay -->
           <div class="absolute inset-0 bg-gradient-to-r from-neutral-50 via-neutral-50/40 to-transparent dark:from-neutral-950 dark:via-neutral-950/40"></div>
@@ -54,18 +55,18 @@ interface Props {
       <!-- Left side: Detailed Info (Active Only) -->
       <div class="hidden lg:block">
         <div class="mb-4">
-            <span class="inline-block px-4 py-1.5 rounded-full bg-orange-500/10 text-orange-500 text-xs font-black uppercase tracking-[0.2em] border border-orange-500/20">
+            <span class="inline-block px-4 py-1.5 rounded-full bg-blue-500/10 text-blue-500 text-xs font-black uppercase tracking-[0.2em] border border-blue-500/20">
                 Premium Solutions
             </span>
         </div>
-        <h2 class="text-4xl md:text-6xl font-black text-neutral-800 dark:text-white mb-8 border-l-8 border-orange-500 pl-8 leading-tight">
+        <h2 class="text-4xl md:text-6xl font-black text-neutral-800 dark:text-white mb-8 border-l-8 border-blue-500 pl-8 leading-tight">
           <Fragment set:html={title} />
         </h2>
         
         <div class="relative h-64">
            {tabs.map((tab, index) => (
              <div class="reel-info absolute inset-0 opacity-0 translate-x-[-20px] transition-all duration-700 pointer-events-none" data-index={index}>
-                <h3 class="text-3xl font-bold text-orange-500 dark:text-orange-400 mb-4">{tab.heading}</h3>
+                <h3 class="text-3xl font-bold text-blue-500 dark:text-blue-400 mb-4">{tab.heading}</h3>
                 <p class="text-xl text-neutral-600 dark:text-neutral-300 leading-relaxed max-w-lg">
                   {tab.content}
                 </p>
@@ -93,11 +94,11 @@ interface Props {
                 <!-- Card Inner -->
                 <div class="relative bg-white/20 backdrop-blur-xl border border-neutral-200/50 dark:border-white/10 p-6 rounded-[2rem] overflow-hidden shadow-xl transition-all duration-500 group-hover:bg-white/30 dark:group-hover:bg-white/10 active:scale-95">
                   <div class="flex items-center gap-6">
-                    <div class="flex-shrink-0 w-20 h-20 rounded-2xl overflow-hidden shadow-lg border-2 border-orange-500/30">
-                        <Image src={tab.src} alt={tab.alt} class="w-full h-full object-cover" />
+                    <div class="flex-shrink-0 w-20 h-20 rounded-2xl overflow-hidden shadow-lg border-2 border-blue-500/30">
+                        <Image src={tab.src} alt={tab.alt} class="w-full h-full object-cover" inferSize={true} />
                     </div>
                     <div class="flex-grow">
-                        <div class="text-orange-600 dark:text-orange-500 text-xs font-black mb-1 uppercase tracking-widest">Category 0{index + 1}</div>
+                        <div class="text-blue-600 dark:text-blue-500 text-xs font-black mb-1 uppercase tracking-widest">Category 0{index + 1}</div>
                         <h4 class="text-xl font-black text-neutral-800 dark:text-white">{tab.heading}</h4>
                     </div>
                     <div class="flex-shrink-0 opacity-40 group-hover:opacity-100 transition-opacity">
@@ -108,7 +109,7 @@ interface Props {
                   </div>
                 </div>
                 <!-- Selection Glow -->
-                <div class="reel-glow absolute -inset-1 bg-gradient-to-r from-orange-500 to-yellow-500 rounded-[2rem] opacity-0 blur-xl transition-opacity duration-500 -z-10"></div>
+                <div class="reel-glow absolute -inset-1 bg-gradient-to-r from-blue-500 to-blue-400 rounded-[2rem] opacity-0 blur-xl transition-opacity duration-500 -z-10"></div>
               </div>
             ))}
          </div>
@@ -118,7 +119,7 @@ interface Props {
     <!-- Scroll Indicator -->
     <div class="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2">
         <span class="text-xs font-black text-white/40 uppercase tracking-[0.3em]">Scroll to Explore</span>
-        <div class="w-px h-12 bg-gradient-to-b from-orange-500 to-transparent"></div>
+        <div class="w-px h-12 bg-gradient-to-b from-blue-500 to-transparent"></div>
     </div>
   </div>
 </section>
@@ -192,7 +193,7 @@ interface Props {
         
         if (i === activeIndex) {
             glow.style.opacity = '0.4';
-            inner.style.borderColor = 'rgba(249, 115, 22, 0.6)';
+            inner.style.borderColor = 'rgba(59, 130, 246, 0.6)';
             inner.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
             inner.style.boxShadow = '0 20px 40px -10px rgba(0,0,0,0.3)';
         } else {
@@ -307,3 +308,4 @@ interface Props {
     will-change: opacity, transform;
   }
 </style>
+

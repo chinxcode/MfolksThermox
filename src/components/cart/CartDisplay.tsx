@@ -14,7 +14,7 @@ export default function CartDisplay() {
         <p className="text-neutral-600 dark:text-neutral-400 mb-8 max-w-sm mx-auto">
           Start adding products to your cart and we'll help you with a technical quotation.
         </p>
-        <a href="/products" className="inline-flex items-center justify-center px-8 py-3 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-xl transition-all">
+        <a href="/products" className="inline-flex items-center justify-center px-8 py-3 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-xl transition-all">
           Browse Products
         </a>
       </div>
@@ -41,7 +41,7 @@ export default function CartDisplay() {
             <div className="flex flex-col sm:flex-row gap-5 items-center sm:items-start">
               {/* Product Info */}
               <div className="flex-1 w-full text-center sm:text-left">
-                <a href={`/${item.productSlug}`} className="text-lg font-bold text-neutral-900 dark:text-neutral-100 hover:text-orange-500 transition-colors block mb-1">
+                <a href={`/${item.productSlug}`} className="text-lg font-bold text-neutral-900 dark:text-neutral-100 hover:text-blue-500 transition-colors block mb-1">
                   {item.productName}
                 </a>
                 <div className="flex flex-wrap justify-center sm:justify-start gap-2 mb-3">
@@ -125,7 +125,7 @@ export default function CartDisplay() {
             <div className="pt-4 border-t border-neutral-200 dark:border-neutral-700">
               <div className="flex justify-between items-baseline mb-1">
                 <span className="text-neutral-900 dark:text-neutral-100 font-bold">Estimated Total</span>
-                <span className="text-2xl font-bold text-orange-500">
+                <span className="text-2xl font-bold text-blue-500">
                   ₹{cart.reduce((sum, item) => sum + ((item.price || 0) * item.quantity), 0).toLocaleString()}
                 </span>
               </div>
@@ -146,7 +146,7 @@ export default function CartDisplay() {
         <div className="space-y-3 pt-4">
           <button
             onClick={handleRequestQuote}
-            className="w-full py-4 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-2xl transition-all shadow-lg shadow-orange-200 dark:shadow-none flex items-center justify-center gap-2"
+            className="w-full py-4 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-2xl transition-all shadow-lg shadow-blue-200 dark:shadow-none flex items-center justify-center gap-2"
           >
             Request Formal Quote
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
@@ -168,3 +168,4 @@ export default function CartDisplay() {
     </div>
   );
 }
+

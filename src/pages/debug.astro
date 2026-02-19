@@ -1,0 +1,94 @@
+---
+import MainLayout from "@/layouts/MainLayout.astro";
+import {
+    fetchGraphQL,
+    GET_ALL_PRODUCT_SLUGS,
+    GET_PRODUCT_BY_SLUG,
+} from "@lib/graphql";
+
+let slugs = [];
+let debugLog = [];
+let specificProductCheck = null;
+
+try {
+    debugLog.push("Fetching all slugs...");
+    const data = await fetchGraphQL(GET_ALL_PRODUCT_SLUGS);
+    slugs = data?.products?.nodes || [];
+    debugLog.push(`Found ${slugs.length} slugs.`);
+
+    // Check for the specific slug mentions by user
+    const targetSlug = "aluminium-thermal-spray-wire";
+    const found = slugs.find((s) => s.slug === targetSlug);
+
+    if (found) {
+        debugLog.push(`Slug "${targetSlug}" FOUND in list.`);
+
+        // Try to fetch details
+        try {
+            debugLog.push(`Attempting to fetch details for "${targetSlug}"...`);
+            const details = await fetchGraphQL(GET_PRODUCT_BY_SLUG, {
+                slug: targetSlug,
+            });
+            if (details?.product) {
+                specificProductCheck = "Success: Product details fetched.";
+            } else {
+                specificProductCheck =
+                    "Failed: Product fetched but returned null data.";
+            }
+        } catch (e) {
+            specificProductCheck = `Error fetching details: ${e.message}`;
+            console.error(e);
+        }
+    } else {
+        debugLog.push(`Slug "${targetSlug}" NOT FOUND in list.`);
+        const similar = slugs.filter((s) => s.slug.includes("alum"));
+        if (similar.length > 0) {
+            debugLog.push(
+                `Did you mean: ${similar.map((s) => s.slug).join(", ")}?`,
+            );
+        }
+    }
+} catch (e) {
+    debugLog.push(`Error fetching slugs: ${e.message}`);
+}
+---
+
+<MainLayout title="Debug">
+    <div class="mx-auto max-w-4xl px-4 py-10">
+        <h1 class="text-3xl font-bold mb-6">Debug Info</h1>
+
+        <div class="bg-gray-100 p-6 rounded-lg mb-8 font-mono text-sm">
+            <h2 class="font-bold mb-2">Log:</h2>
+            <ul class="space-y-1">
+                {debugLog.map((log) => <li>{log}</li>)}
+            </ul>
+        </div>
+
+        {
+            specificProductCheck && (
+                <div
+                    class={`p-6 rounded-lg mb-8 font-bold ${specificProductCheck.startsWith("Success") ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"}`}
+                >
+                    {specificProductCheck}
+                </div>
+            )
+        }
+
+        <h2 class="text-xl font-bold mb-4">Available Slugs ({slugs.length})</h2>
+        <ul class="grid grid-cols-1 md:grid-cols-2 gap-2">
+            {
+                slugs.map((s) => (
+                    <li class="bg-white p-3 border rounded shadow-sm flex justify-between items-center">
+                        <span class="font-mono text-sm">{s.slug}</span>
+                        <a
+                            href={`/${s.slug}`}
+                            class="text-blue-600 hover:underline text-xs"
+                        >
+                            View Page
+                        </a>
+                    </li>
+                ))
+            }
+        </ul>
+    </div>
+</MainLayout>

@@ -2,7 +2,7 @@
 // ✅ EXACT QUERIES - NO HALLUCINATIONS, NO INVENTED FIELDS
 // ✅ FETCH ONLY REAL DATA FROM WORDPRESS API
 
-const WP_URL = import.meta.env.PUBLIC_WORDPRESS_URL || 'https://geotrix.mfolks.com/graphql';
+const WP_URL = import.meta.env.PUBLIC_WORDPRESS_URL || 'https://thermox.mfolks.com/graphql';
 
 export async function wpFetch(query: string, variables = {}) {
   try {

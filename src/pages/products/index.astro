@@ -1,31 +1,59 @@
 ---
-// Importing necessary components
 import MainLayout from "@layouts/MainLayout.astro";
 import ProductList from "@components/products/ProductList";
-import { wpFetch, ALL_PRODUCTS_QUERY, ALL_CATEGORIES_QUERY } from "@lib/wp";
 import { SITE } from "@data/constants";
+import {
+  fetchGraphQL,
+  GET_PRODUCTS_LIST,
+  GET_PRODUCT_CATEGORIES,
+} from "@lib/graphql";
 
-// Fetch products and categories from WordPress
-const data = await wpFetch(ALL_PRODUCTS_QUERY);
-const categoriesData = await wpFetch(ALL_CATEGORIES_QUERY);
+// Fetch products and categories from GraphQL
+let products = [];
+let allCategories = [];
 
-let products = data?.products?.nodes || [];
-let categories = categoriesData?.productCategories?.nodes || [];
+try {
+  // Fetch products
+  const productsData = await fetchGraphQL(GET_PRODUCTS_LIST);
+  const rawProducts = productsData?.products?.nodes || [];
 
-// Fallback if categories are not fetched separately, try to extract from products
-if (categories.length === 0 && products.length > 0) {
-  const catMap = new Map();
-  products.forEach((p: any) => {
-    p.productCategories?.nodes?.forEach((c: any) => {
-      catMap.set(c.slug, c);
-    });
-  });
-  categories = Array.from(catMap.values());
+  // Fetch categories
+  const categoriesData = await fetchGraphQL(GET_PRODUCT_CATEGORIES);
+  const rawCategories = categoriesData?.productCategories?.nodes || [];
+
+  // Transform Categories
+  allCategories = rawCategories.map((cat: any) => ({
+    name: cat.name,
+    slug: cat.slug,
+  }));
+
+  // Transform Products
+  products = rawProducts.map((prod: any) => ({
+    title: prod.title,
+    slug: prod.slug,
+    featuredImage: {
+      node: {
+        sourceUrl:
+          prod.featuredImage?.node?.sourceUrl ||
+          `https://placehold.co/600x600?text=${encodeURIComponent(prod.title)}`,
+        altText: prod.featuredImage?.node?.altText || prod.title,
+      },
+    },
+    productCategories: {
+      nodes: prod.productCategories?.nodes || [],
+    },
+    productData: {
+      shortDescription: prod.productData?.shortDescription || "",
+    },
+  }));
+} catch (error) {
+  console.error("Error fetching products:", error);
 }
 
 const pageTitle = `Products | ${SITE.title}`;
-const metaDescription = "Explore our comprehensive range of earthing and lightning protection solutions. Each product is designed for reliability, safety, and superior performance.";
-const ogTitle = "Earthing & Lightning Protection Products | MFOLKS Geotrix";
+const metaDescription =
+  "Explore our comprehensive range of thermal spray wires, powders, and equipment. Each product is designed for reliability, safety, and superior performance.";
+const ogTitle = "Thermal Spray Solutions Products | MFOLKS";
 ---
 
 <MainLayout
@@ -34,13 +62,17 @@ const ogTitle = "Earthing & Lightning Protection Products | MFOLKS Geotrix";
   customOgTitle={ogTitle}
 >
   <div class="relative transition-colors duration-300">
-      {/* Hero Section */}
+    {/* Hero Section */}
 
-      <div class="section-padding pb-24 pt-8">
-         <ProductList client:load initialProducts={products} categories={categories} />
-      </div>
+    <div class="section-padding pb-24 pt-8">
+      <ProductList
+        client:load
+        initialProducts={products}
+        categories={allCategories}
+      />
+    </div>
 
-      {/* Quote Section Hook (Optional ID target) */}
-      <div id="quote-form"></div>
+    {/* Quote Section Hook (Optional ID target) */}
+    <div id="quote-form"></div>
   </div>
 </MainLayout>
