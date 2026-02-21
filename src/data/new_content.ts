@@ -3,10 +3,10 @@ export const companyDetails = {
   name: "MFOLKS Industries Pvt Ltd",
   shortName: "MFOLKS",
   tagline: "Thermal Spray Solutions",
-  address: "Bhiwadi and Chopanki, Rajasthan; Narol, Ahmedabad, Gujarat, INDIA",
+  address: "801–802, 8th Floor, KLJ Tower, Pitam Pura, Netaji Subhash Place, Delhi – 110034, India",
   description: "Manufacturer of Thermal Spray Wires, Powders, and Equipment. Roots tracing back to 1958.",
-  email: "contact@mfolks.com", // Placeholder
-  phone: "+91 0000000000", // Placeholder
+  email: "info@mfolks.com",
+  phone: "+91 9711826427",
 }
 
 export const productCategories = [
