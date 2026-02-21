@@ -36,7 +36,7 @@ const author = SITE.author;
 const canonical = new URL(Astro.url.pathname, Astro.site || Astro.url.origin)
   .href;
 const basePath = Astro.url.pathname;
-const favicon = logo.src;
+const favicon = "/favicon.ico";
 
 let socialImage = customSocialImage || logo.src;
 
@@ -118,7 +118,8 @@ const alternateLanguageLinks: string = Object.entries(languages)
 
 {/* Links to the webmanifest and sitemap */}
 {/* https://docs.astro.build/en/guides/integrations-guide/sitemap/ */}
-<link rel="icon" href={favicon} sizes="any" />
+<link rel="icon" href={favicon} type="image/x-icon" />
+<link rel="shortcut icon" href={favicon} type="image/x-icon" />
 <link rel="sitemap" href="/sitemap-index.xml" />
 
 {/* Set theme color */}
