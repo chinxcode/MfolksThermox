@@ -1,4 +1,5 @@
 const url = "https://thermox.mfolks.com/graphql";
+//
 
 async function fetchGraphQL(query, variables = {}) {
     const response = await fetch(url, {
