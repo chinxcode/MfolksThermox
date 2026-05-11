@@ -6,6 +6,7 @@ import NavLink from "@components/ui/links/NavLink.astro";
 import enStrings from "@utils/navigation.ts";
 import frStrings from "@utils/fr/navigation.ts";
 import BrandLogo from "@components/BrandLogo.astro";
+import CartIconClient from "@components/cart/CartIconClient";
 
 // Select the correct translation based on the page's lang prop:
 const strings = Astro.currentLocale === "fr" ? frStrings : enStrings;
@@ -90,6 +91,11 @@ const homeUrl = Astro.currentLocale === "fr" ? "/fr" : "/";
             <NavLink url={link.url} name={link.name} />
           ))
         }
+
+        <!-- Cart Icon -->
+        <span class="inline-block">
+          <CartIconClient client:load />
+        </span>
 
         <!-- Simple React-based theme toggle for reliable switching -->
         <span class="hidden md:inline-block">

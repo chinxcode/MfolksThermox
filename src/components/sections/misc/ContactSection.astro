@@ -367,8 +367,7 @@ const subtitle =
 <!-- Form Handler Script -->
 <script
   define:vars={{
-    WEB_APP_URL: import.meta.env.PUBLIC_GSCRIPT_APP_URL || "",
-    API_KEY: import.meta.env.PUBLIC_GSCRIPT_API_KEY || "",
+    WEB3FORMS_KEY: import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY || "",
     IS_DEV: import.meta.env.DEV,
   }}
 >
@@ -403,9 +402,9 @@ const subtitle =
     statusEl.innerText = "";
 
     // Validate configuration
-    if (!WEB_APP_URL || !API_KEY) {
+    if (!WEB3FORMS_KEY) {
       statusEl.innerText =
-        "⚠️ Configuration error. Please contact us directly.";
+        "⚠️ Configuration error. Web3Forms access key is missing.";
       statusEl.classList.replace("text-neutral-500", "text-red-600");
       return;
     }
@@ -475,46 +474,43 @@ const subtitle =
     const finalCountryCode =
       selectedCountryCode === "OTHER" ? customCountryCode : selectedCountryCode;
 
-    // Build payload
-    const payload = {
-      submitted_at: new Date().toISOString(),
-      full_name: formData.get("name"),
-      email: formData.get("hs-email-contacts"),
-      country_code: finalCountryCode || "",
-      phone: formData.get("hs-phone-number"),
-      company_name: formData.get("company"),
-      interested_in: formData.get("product"),
-      company_type: formData.get("company_type") || "",
-      service_product_required: formData.get("product"),
-      country: finalCountry || "",
-      state: formData.get("state") || "",
-      city: formData.get("city") || "",
-      message: fullMessage,
-      source: "MFolks Thermox Site",
-      recaptcha_token: captchaResponse,
-    };
+    // Build payload for Web3Forms
+    formData.append("access_key", WEB3FORMS_KEY);
+    formData.append("subject", "New Enquiry from MFolks Thermox Site");
+    formData.append("from_name", formData.get("name") || "MFolks Website");
+    
+    // Map HubSpot fields to generic fields for the email readout
+    formData.append("Email Address", formData.get("hs-email-contacts"));
+    formData.append("Phone Number", formData.get("hs-phone-number"));
+    formData.append("Final Country Code", finalCountryCode || "N/A");
+    formData.append("Final Country", finalCountry || "N/A");
+    
+    // Web3forms requires the "email" field for reply-to
+    if (formData.get("hs-email-contacts")) {
+       formData.append("email", formData.get("hs-email-contacts"));
+    }
+
+    // Update message field to include cart and quantity
+    formData.set("message", fullMessage);
 
     try {
-      const response = await fetch(`${WEB_APP_URL}?key=${API_KEY}`, {
+      const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: { "Content-Type": "text/plain;charset=utf-8" },
-        body: JSON.stringify(payload),
+        body: formData,
       });
 
-      const resultText = await response.text();
-      let result;
-      try {
-        result = JSON.parse(resultText);
-      } catch (e) {
-        result = { status: "success" };
-      }
+      const result = await response.json();
 
-      if (result.status === "success" || response.ok) {
+      if (result.success) {
         statusEl.innerText =
           "✅ Success! Your enquiry has been received. We'll respond within 24 hours.";
         statusEl.classList.replace("text-neutral-500", "text-green-600");
         form.reset();
         if (!IS_DEV && typeof grecaptcha !== "undefined") grecaptcha.reset();
+        
+        // Clear cart after successful submission
+        localStorage.removeItem("mfolks_cart");
+        window.dispatchEvent(new Event('storage')); // trigger nanostore updates if any
       } else {
         throw new Error(result.message || "Submission failed");
       }

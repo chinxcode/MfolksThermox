@@ -23,20 +23,26 @@ export async function getStaticPaths() {
     const data = await fetchGraphQL(GET_ALL_PRODUCT_SLUGS);
     const slugs = data?.products?.nodes || [];
 
-    // Fetch details for each product to generate pages
-    const paths = await Promise.all(
-      slugs.map(async (node: any) => {
+    // Fetch details for each product sequentially to avoid rate limits / 503 errors
+    const paths = [];
+    for (const node of slugs) {
+      try {
         const productData = await fetchGraphQL(GET_PRODUCT_BY_SLUG, {
           slug: node.slug,
         });
-        return {
-          params: { slug: node.slug },
-          props: {
-            product: productData?.product,
-          },
-        };
-      }),
-    );
+        
+        if (productData?.product) {
+          paths.push({
+            params: { slug: node.slug },
+            props: {
+              product: productData.product,
+            },
+          });
+        }
+      } catch (err) {
+        console.error(`Error fetching product ${node.slug}:`, err);
+      }
+    }
 
     return paths;
   } catch (error) {
