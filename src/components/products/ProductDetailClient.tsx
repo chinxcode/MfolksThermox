@@ -20,7 +20,7 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
             <div className="bg-neutral-50 dark:bg-neutral-800 rounded-xl p-6 text-center">
                 <p className="text-neutral-600 dark:text-neutral-400 mb-4">Contact us for pricing and availability.</p>
                 <a
-                    href="/contact-us"
+                    href="/contact"
                     className="inline-block w-full py-3 px-4 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-lg transition-colors"
                 >
                     Request Quote
